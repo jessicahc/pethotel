@@ -1,0 +1,3 @@
+#ResId,Owner Name,Address,City,State,Zip,Phone,DropOff Date,Pickup Date,Pet Type,Pet Name,Sex,Size,Breed,Age,FoodOption,MaxWalkingTime,LitterStation,Cage#,OwnerInstructions,WorkerComment
+#Field ResId...FoodOption are mandatory (index 0-15), the remaining fields are optional
+001,John Smith,123 Apple St.,New York, NY, 10932,6461234567,11/25/2022,12/1/2022,Dog,Sparky,M,2,g,2,0,90
