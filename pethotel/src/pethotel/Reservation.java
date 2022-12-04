@@ -2,7 +2,8 @@ package pethotel;
 
 import java.util.Date;
 public class Reservation{
-
+	
+	private Bill bill;
 	private String reservationId;
 	private Owner owner;
 	private Animal animal;
@@ -23,6 +24,12 @@ public class Reservation{
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.lengthOfStay = calculateLengthOfStay(beginDate, endDate);
+		if (animal.getSpecies() == "cat"){
+			bill = new Bill(75);
+		}
+		else if (animal.getSpecies() == "dog"){
+			bill = new Bill(100);
+		}
 	}
 
 
