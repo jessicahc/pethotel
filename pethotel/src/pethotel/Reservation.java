@@ -12,10 +12,12 @@ public class Reservation{
 	private Date endDate = new Date();
 	private int cageNumber;
 	private int foodOption;
+	private boolean isActive;
 
 	public Reservation(Owner owner, Animal animal){
 		this.owner = owner;
 		this.animal = animal;
+		isActive = true;
 	}
 
 	public Reservation(Owner owner, Animal animal, Date beginDate, Date endDate){
@@ -30,6 +32,7 @@ public class Reservation{
 		else if (animal.getSpecies() == "dog"){
 			bill = new Bill(100);
 		}
+		isActive = true;
 	}
 
 
@@ -47,6 +50,14 @@ public class Reservation{
 		String string = String.valueOf(dateInt);
 		LocalDate date = LocalDate.parse(string, DateTimeFormatter.BASIC_ISO_DATE);
 		return date;
+	}
+	
+	public void checkDate(){
+		Date current = new Date();
+		if current.after(endDate){
+			isActive = false;
+		}
+		
 	}
 
 	//getters and setters
