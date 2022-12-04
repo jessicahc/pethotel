@@ -1,160 +1,89 @@
 package pethotel;
 
 import java.util.Date;
+public class Reservation{
 
-public class Reservation {
-	
-	public static final char STATUS_CANCELLED = 'C';
-	public static final char STATUS_EXPIRED = 'E';
-	public static final char STATUS_ACTIVE = 'A';
-	public static final char STATUS_UPCOMING = 'U';
-	
-	public static final char PET_TYPE_UNKNOWN = 'N';
-	public static final char PET_TYPE_DOG = 'D';
-	public static final char PET_TYPE_CAT = 'C';
-	
-	public static final int OWNER_BRINGS_FOOD = 1;
-	public static final int HOTEL_PROVIDES_FOOD = 0;
-	
-	String reservationId;
-	char status;
-	
-	Date beginDate;
-	Date endDate;
-	Owner owner;
-	Animal animal;
-	int foodOption;
-	int cageNum;
-	String ownerInstructions;
-	String attendantComments;
-	
-	
-	public Reservation() {
-		foodOption = OWNER_BRINGS_FOOD;
-		cageNum = -1;
+	private String reservationId;
+	private Owner owner;
+	private Animal animal;
+	private int lengthOfStay;
+	private Date beginDate = new Date();
+	private Date endDate = new Date();
+	private int cageNumber;
+	private int foodOption;
+
+	public Reservation(Owner owner, Animal animal){
+		this.owner = owner;
+		this.animal = animal;
 	}
-	
-	public void setReservationId(String id) {
-		this.reservationId = id;
+
+	public Reservation(Owner owner, Animal animal, Date beginDate, Date endDate){
+		this.owner = owner;
+		this.animal = animal;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		this.lengthOfStay = calculateLengthOfStay(beginDate, endDate);
 	}
-	
-	public void setBeginDate(Date date) {
-		this.beginDate = date;
-		
-		if (status != STATUS_CANCELLED) {
-			// set status here based on beginDate and endDate
-		}
+
+
+	public int calculateLengthOfStay(Date beginDate, Date endDate){
+		long diff = (endDate - beginDate);
+		int daysdiff = (int) (timeDiff / (1000 * 60 * 60 * 24));
+		return daysdiff;
 	}
-	
-	public void setEndDate(Date date) {
-		this.endDate = date;
-		
-		if (status != STATUS_CANCELLED) {
-			// set status here based on beginDate and endDate
-		}
+
+	public Date dateConvert(String dateString) {
+		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.BASIC_ISO_DATE);
+		return date;
 	}
-	
-	public void setOwner(Owner o) {
-		this.owner = o;
+	public Date dateConvert(int dateInt) {
+		String string = String.valueOf(dateInt);
+		LocalDate date = LocalDate.parse(string, DateTimeFormatter.BASIC_ISO_DATE);
+		return date;
 	}
-	
-	public void setAnimal(Animal a) {
-		this.animal = a;
-	}
-	
-	public void setFoodOption(int f) {
-		switch(f) {
-		case OWNER_BRINGS_FOOD: 
-		case HOTEL_PROVIDES_FOOD: 
-				this.foodOption = f;
-				break;
-		default:
-			System.err.println("Reservation.setFoodOption(int): Input FoodOption Not Recognized: " + f);
-			break;
-		}
-	}
-	
-	public void setCageNum(int c) {
-		if (c > 0)
-			this.cageNum = c;
-		else
-			System.err.println("Reservation.setCageNum(int): Invalid Cage Number " + c);
-	}
-	
-	public void setOwnerInstructions(String s) {
-		this.ownerInstructions = s;
-	}
-	
-	public void setAttendantComments(String s) {
-		this.attendantComments = s;
-	}
-	
+
+	//getters and setters
+
 	public String getReservationId() {
-		return this.reservationId;
+		return reservationId;
 	}
-	
-	public char getStatus() {
-		return this.status;
+	public void setReservationId(String reservationId) { // should we "set" resId manually or assign automatically?
+		this.reservationId = reservationId;
 	}
-	
-	public Owner getOwner() {
-		return this.owner;
+	public Owner getOwner(){
+		return owner;
 	}
-	
-	public Animal getAnimal() {
-		return this.animal;
+	public void setOwner(Owner owner){
+		this.owner = owner;
 	}
-	
-	public char getPetType() {
-		if (animal != null) {
-			if (animal.getClass() == Dog.class) {
-				return PET_TYPE_DOG;
-			}
-			else if (animal.getClass() == Cat.class) {
-				return PET_TYPE_CAT;
-			}
-		}
-		return PET_TYPE_UNKNOWN;
+	public Animal getAnimal(){
+		return animal;
 	}
-	
-	public String getPetTypeString() {
-		switch(getPetType()) {
-			case PET_TYPE_DOG:
-				return "Dog";
-			case PET_TYPE_CAT:
-				return "Cat";
-			case PET_TYPE_UNKNOWN:
-				return "Unkown";
-			default:
-				return null;
-		}
+	public void setAnimal(Animal animal){
+		this.animal = animal;
 	}
-	
-	public int getFoodOption() {
-		return this.foodOption;
+	public Date getBeginDate(){
+		return beginDate;
 	}
-	
-	public int getCageNumber() {
-		return this.cageNum;
+	public void setBeginDate(Date beginDate){
+		this.beginDate = beginDate;
 	}
-	
-	public Date getBeginDate() {
-		return this.beginDate;
+	public Date getEndDate(){
+		return endDate;
 	}
-	
-	public Date getEndDate() {
-		return this.endDate;
+	public void setEndnDate(Date endDate){
+		this.endDate = endDate;
 	}
-	
-	public String getOwnerInstruction() {
-		return this.ownerInstructions;
+	public int getCageNumber(){
+		return cageNumber;
 	}
-	
-	public String getAttendantComments() {
-		return this.attendantComments;
+	public void setCageNumber(int cageNumber){
+		this.cageNumber = cageNumber;
 	}
-	
-	public boolean isCancelled() {
-		return status == STATUS_CANCELLED;
+	public int getFoodOption(){
+		return foodOption;
+	}
+	public void setFoodOption(int foodOption){
+		this.foodOption = foodOption;
 	}
 }
