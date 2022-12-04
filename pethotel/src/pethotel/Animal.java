@@ -3,7 +3,7 @@ package pethotel;
 public class Animal {
 	
 	//data fields
-	private String petName, species, ownerName, activityReport;
+	private String petName, species, ownerName;
 	private char sex;
 	private int weight, reservation, count = 1, id;
 	private double bill;
