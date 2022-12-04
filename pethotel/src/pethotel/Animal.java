@@ -5,7 +5,7 @@ public class Animal {
 	//data fields
 	private String petName, species, ownerName;
 	private char sex;
-	private int weight, reservation, count = 1, id;
+	private int weight, reservation, static count = 1, id;
 	private double bill;
 	
 	//constructors
