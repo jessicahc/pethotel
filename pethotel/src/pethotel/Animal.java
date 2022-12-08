@@ -1,6 +1,6 @@
 package pethotel;
 
-public class Animal {
+public abastract class Animal {
 	
 	//data fields
 	private String petName, species, ownerName;
