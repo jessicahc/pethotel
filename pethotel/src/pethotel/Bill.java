@@ -1,75 +1,81 @@
 package pethotel;
 
-import java.util.*;
 import java.io.*;
 
 public class Bill {
     
     // fields
+
     private double billingAmount; 
     private double depositAmount;
     private double balanceAmount;
     private double rate;
+    Animal animal;
+    Reservation reservation;
+    private int lengthOfStay;
     
     // constructors
-    public Bill()
-    {
-    
-    }
 
     public Bill(double depositAmount)
     {
         this.depositAmount = depositAmount;
     }
 
-    // methods
-    public double calculateBillingAmount(int lengthOfStay, Animal animal)
+    public Bill(double depositAmount, Animal animal, Reservation reservation)
     {
-        if (animal.getSpecies().equals("dog"))
+        this.depositAmount = depositAmount;
+        this.animal = animal;
+        this.reservation = reservation;
+        this.lengthOfStay = reservation.calculateLengthOfStay(reservation.getBeginDate(), reservation.getEndDate());
+    }
+
+    // methods
+
+    public double calculateBillingAmount()
+    {
+        if (animal.getSpecies() == "dog")
         {
-            this.rate = 100;
+            rate = 100;
         }
-        else 
+        else if (animal.getSpecies() == "cat")
         {
-            this.rate = 70;
+            rate = 70;
         }
 
-        this.billingAmount = lengthOfStay * rate;
-
+        billingAmount = lengthOfStay * rate;
         return billingAmount;
     }
 
     public double calculateBalanceAmount()
     {
-        this.balanceAmount = calculateBillingAmount(lengthOfStay, animal) - depositAmount;
-
+        balanceAmount = calculateBillingAmount() - depositAmount;
         return balanceAmount;
     }
 
-    public void generateBill(Animal animal, Reservation r) throws IOException
+    public void generateBill() throws IOException
     {
         boolean append = true; 
-        String filename = "bill.txt";
+        String filename = "bill-activityreport.txt";
         FileWriter file = new FileWriter(filename, append);
         PrintWriter writer = new PrintWriter(file);
 
         writer.println("Bill:");
         writer.println("Owner Name: " + animal.getOwnerName());
         writer.println("Pet name: " + animal.getPetName());
-        writer.println("Check in Date: " + r.getBeginDate());
-        writer.println("Check out Date: " + r.getEndDate());
+        writer.println("Check in Date: " + reservation.getBeginDate());
+        writer.println("Check out Date: " + reservation.getEndDate());
         writer.println("Length of Stay: " + lengthOfStay);
-        writer.println("Cost per night: " + this.rate);
-        writer.println("Deposit Amount: " + this.depositAmount);
-        writer.println("Billing Amount: " + calculateBillingAmount(lengthOfStay, animal));
-        writer.println("Deposit Amount: " + this.depositAmount);
-        writer.println("Balance Amount: " + this.balanceAmount);
+        writer.println("Cost per night: " + rate);
+        writer.println("Deposit Amount: " + depositAmount);
+        writer.println("Billing Amount: " + billingAmount);
+        writer.println("Deposit Amount: " + depositAmount);
+        writer.println("Balance Amount: " + balanceAmount);
         
         file.close();
     }
 
-    // setters 
-    
+    // setters & getters
+
     public void setDepositAmount(double depositAmount)
     {
         this.depositAmount = depositAmount;
@@ -85,7 +91,6 @@ public class Bill {
         this.billingAmount = billingAmount;
     }
 
-    // getters
     public double getDepositAmount()
     {
         return depositAmount;
@@ -100,4 +105,5 @@ public class Bill {
     {
         return billingAmount;
     }
+
 }
