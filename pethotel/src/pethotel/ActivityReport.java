@@ -1,23 +1,27 @@
 package pethotel;
 
-import java.util.*;
 import java.io.*;
 
 public class ActivityReport {
     
     // fields
     private double playTime;
-    private String careWorkerComments;
+    private String careWorkerComments = "";
 
-    // constructor
+    // constructors
     public ActivityReport()
     {
 
     }
 
+    public ActivityReport(double playTime)
+    {
+        this.playTime = playTime;
+    }
+
     // methods
 
-    // setters
+    // setters & getters
     public void setPlayTime(double playTime)
     {
         this.playTime = playTime;
@@ -28,7 +32,6 @@ public class ActivityReport {
         this.careWorkerComments = careWorkerComments;
     }
 
-    // getters
     public double getPlayTime()
     {
         return this.playTime;
@@ -52,10 +55,10 @@ public class ActivityReport {
     }  
 
     // generate activity report
-    public void generateReport()
+    public void generateReport() throws IOException
     {
         boolean append = true; 
-        String filename = "activityreport.txt";
+        String filename = "bill-activityreport.txt";
         FileWriter file = new FileWriter(filename, append);
         PrintWriter writer = new PrintWriter(file);
 
@@ -66,5 +69,4 @@ public class ActivityReport {
         
         file.close();
     }
-
 }
