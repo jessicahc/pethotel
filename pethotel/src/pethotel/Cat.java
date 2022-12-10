@@ -3,6 +3,7 @@ package pethotel;
 
 public class Cat extends Animal {
 	
+	private char breed;
 	public static final char CAT_RUSSIAN_BLUE = 'R';
 	public static final char CAT_PERSIAN = 'P';
 	public static final char CAT_BRITISH_SHORTHAIR = 'B';
@@ -14,13 +15,21 @@ public class Cat extends Animal {
 	public static final char CAT_RAGDOLL = 'D';
 	public static final char CAT_MIXED = 'X';
 	public static final char CAT_UNKNOWN = 'U';
+	private boolean humanReactive;
+	private boolean animalReactive;
 	
-	int litterStationNum;
+	private int litterStationNum;
 	
 	public Cat() {
 		super();
 		this.breed = CAT_UNKNOWN;
 		this.litterStationNum = -1;
+	}
+	
+	public Cat(char breed, boolean human, boolean animal) {
+		this.breed = breed;
+		this.humanReactive = human;
+		animalReactive = animal;
 	}
 	
 	public String getBreedString() {
@@ -39,6 +48,7 @@ public class Cat extends Animal {
 		}
 	}
 	
+	//getters and setters
 	public void setLitterStationNum(int i) {
 		if (i > 0)
 			this.litterStationNum = i;
@@ -48,6 +58,18 @@ public class Cat extends Animal {
 	
 	public int getLitterStationNum() {
 		return this.litterStationNum;
+	}
+	public void sethumanReactive(boolean a) {
+		this.humanReactive = a;
+	}
+	public void setanimalReactive(boolean a) {
+		this.animalReactive = a;
+	}
+	public boolean gethumanReactive() {
+		return humanReactive;
+	}
+	public boolean getanimalReactive() {
+		return animalReactive;
 	}
 	
 }
