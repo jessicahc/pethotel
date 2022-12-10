@@ -76,6 +76,10 @@ public class ViewReservation implements ActionListener{
 	JRadioButton higher = new JRadioButton("31-50");
 	JRadioButton uhigher = new JRadioButton("50+");
 	ButtonGroup groupw = new ButtonGroup();
+	JLabel cagenum = new JLabel("Cage #");
+	JTextField cage = new JTextField();
+	JLabel comments = new JLabel("Care attendant's Comments");
+	JTextField comm = new JTextField();
 		
 	
 	
@@ -349,6 +353,24 @@ public class ViewReservation implements ActionListener{
 		gbc.gridx=0;
 		gbc.gridy=22;
 		centerPanel.add(instr,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=23;
+		centerPanel.add(cagenum, gbc);
+		
+		cage.setPreferredSize(new Dimension(40,30));
+		gbc.gridx=1;
+		gbc.gridy=23;
+		centerPanel.add(cage,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=24;
+		centerPanel.add(comments,gbc);
+		
+		comm.setPreferredSize(new Dimension(250,50));
+		gbc.gridx=0;
+		gbc.gridy=25;
+		centerPanel.add(comm,gbc);
 			
 		//ADDING ALL THE PANELS TO THE MAIN PANEL
 		mainpanel.add(northPanel, BorderLayout.NORTH);
