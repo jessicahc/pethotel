@@ -76,11 +76,18 @@ public class ViewReservation implements ActionListener{
 	JRadioButton higher = new JRadioButton("31-50");
 	JRadioButton uhigher = new JRadioButton("50+");
 	ButtonGroup groupw = new ButtonGroup();
+	JLabel hreactive = new JLabel("Is you Pet reactive(or aggressive) to Humans?");
+	JRadioButton hYes = new JRadioButton("Yes");
+	JRadioButton hNo = new JRadioButton("No");
+	ButtonGroup grouph= new ButtonGroup();
+	JLabel areactive = new JLabel("Is your Pet reactive(or aggressive) to other animals?");
+	JRadioButton aYes = new JRadioButton("Yes");
+	JRadioButton aNo = new JRadioButton("No");
+	ButtonGroup groupanimal= new ButtonGroup();
 	JLabel cagenum = new JLabel("Cage #");
 	JTextField cage = new JTextField();
 	JLabel comments = new JLabel("Care attendant's Comments");
 	JTextField comm = new JTextField();
-		
 	
 	
 	public ViewReservation() {
@@ -161,9 +168,9 @@ public class ViewReservation implements ActionListener{
 		gbc.weighty =1;
 		gbc.gridx=0;
 		gbc.gridy=0;
-        	centerPanel.add(dStay,gbc);
+        centerPanel.add(dStay,gbc);
 		
-        	gbc.gridx = 1;
+        gbc.gridx = 1;
 		gbc.gridy=0;
 		centerPanel.add(cancel,gbc);
 		
@@ -347,29 +354,56 @@ public class ViewReservation implements ActionListener{
 		
 		gbc.gridx=0;
 		gbc.gridy=21;
+		centerPanel.add(hreactive, gbc);
+		grouph.add(hYes);
+		grouph.add(hNo);
+		
+		gbc.gridx=1;
+		gbc.gridy=21;
+		centerPanel.add(hYes,gbc);
+		
+		gbc.gridx=2;
+		gbc.gridy=21;
+		centerPanel.add(hNo,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=22;
+		centerPanel.add(areactive, gbc);
+		groupanimal.add(aYes);
+		groupanimal.add(aNo);
+		gbc.gridx=1;
+		gbc.gridy=22;
+		centerPanel.add(aYes,gbc);
+		
+		gbc.gridx=2;
+		gbc.gridy=22;
+		centerPanel.add(aNo,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=23;
 		centerPanel.add(specInstr,gbc);
 		
 		instr.setPreferredSize(new Dimension(300,60));
 		gbc.gridx=0;
-		gbc.gridy=22;
+		gbc.gridy=24;
 		centerPanel.add(instr,gbc);
 		
 		gbc.gridx=0;
-		gbc.gridy=23;
+		gbc.gridy=25;
 		centerPanel.add(cagenum, gbc);
 		
 		cage.setPreferredSize(new Dimension(40,30));
 		gbc.gridx=1;
-		gbc.gridy=23;
+		gbc.gridy=25;
 		centerPanel.add(cage,gbc);
 		
 		gbc.gridx=0;
-		gbc.gridy=24;
+		gbc.gridy=26;
 		centerPanel.add(comments,gbc);
 		
 		comm.setPreferredSize(new Dimension(250,50));
 		gbc.gridx=0;
-		gbc.gridy=25;
+		gbc.gridy=27;
 		centerPanel.add(comm,gbc);
 			
 		//ADDING ALL THE PANELS TO THE MAIN PANEL
