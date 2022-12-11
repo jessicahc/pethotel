@@ -1,25 +1,22 @@
 package pethotel;
-import java.util.ArrayList;
 
 public class Owner {
 
 	private String name;
 	private String address;
-	private int phone;
-	private int id;
+	private String phone;
+	
 
 	public Owner() { }
-	public Owner(String name, String address, int phone, int id) {
+	public Owner(String name, String address, String phone) {
 		
 		this.name = name;
 		this.address = address;
-		this.phone = phone;
-		this.id = id;
+		this.phone = phone;		
 	}
 
 
 	// getters and setters
-
 	public String getName() {
 		return name;
 	}
@@ -34,17 +31,10 @@ public class Owner {
 		this.address = address;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	}	
 }

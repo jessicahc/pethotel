@@ -3,18 +3,27 @@ package pethotel;
 
 public class Cat extends Animal {
 	
-	private char breed;
+	// All constants are defined here:
+	
+	// Cat-specific breeds
 	public static final char CAT_RUSSIAN_BLUE = 'R';
 	public static final char CAT_PERSIAN = 'P';
 	public static final char CAT_BRITISH_SHORTHAIR = 'B';
 	public static final char CAT_AMERICAN_SHORTHAIR = 'A';
 	public static final char CAT_EXOTIC_SHORTHAIR = 'E';
-	public static final char CAT_MAINECOON = 'M';
+	public static final char CAT_MAINECOON = 'O';
 	public static final char CAT_SPHYNX = 'Y';
 	public static final char CAT_SIAMESE = 'S';
 	public static final char CAT_RAGDOLL = 'D';
 	public static final char CAT_MIXED = 'X';
 	public static final char CAT_UNKNOWN = 'U';
+	
+	public static final String[] CAT_BREED_LIST = new String[] 
+			{"American Shorthair", "British Shorthair", "Exotic Shorthair", "Mainecoon", 
+			 "Persian", "Ragdoll", "Russian Blue",  "Sphynx", "Siamese", "Mixed", "Unknown"};
+	
+	private char breed;
+	
 	private boolean humanReactive;
 	private boolean animalReactive;
 	
@@ -30,6 +39,10 @@ public class Cat extends Animal {
 		this.breed = breed;
 		this.humanReactive = human;
 		animalReactive = animal;
+	}
+	
+	public String getPetType() {
+		return "Cat";
 	}
 	
 	public String getBreedString() {
@@ -49,6 +62,33 @@ public class Cat extends Animal {
 	}
 	
 	//getters and setters
+	public void setBreed(char breed) {
+		switch (breed) {
+			case CAT_RUSSIAN_BLUE:  
+			case CAT_PERSIAN: 
+			case CAT_BRITISH_SHORTHAIR:   
+			case CAT_AMERICAN_SHORTHAIR:   
+			case CAT_EXOTIC_SHORTHAIR:   
+			case CAT_MAINECOON:  
+			case CAT_SPHYNX: 
+			case CAT_SIAMESE:
+			case CAT_RAGDOLL: 
+			case CAT_MIXED:			
+			case BREED_MIXED:
+			case BREED_UNKNOWN:
+				this.breed = breed;
+				break;
+			default: // Unrecognized breed
+				System.out.println("Cat: invalid breed provided " + breed);
+				break;
+		}
+		
+	}
+	
+	public char getBreed() {
+		return breed;
+	}
+	
 	public void setLitterStationNum(int i) {
 		if (i > 0)
 			this.litterStationNum = i;
@@ -59,16 +99,16 @@ public class Cat extends Animal {
 	public int getLitterStationNum() {
 		return this.litterStationNum;
 	}
-	public void sethumanReactive(boolean a) {
+	public void setHumanReactive(boolean a) {
 		this.humanReactive = a;
 	}
-	public void setanimalReactive(boolean a) {
+	public void setAnimalReactive(boolean a) {
 		this.animalReactive = a;
 	}
-	public boolean gethumanReactive() {
+	public boolean getHumanReactive() {
 		return humanReactive;
 	}
-	public boolean getanimalReactive() {
+	public boolean getAnimalReactive() {
 		return animalReactive;
 	}
 	

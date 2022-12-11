@@ -9,12 +9,16 @@ import java.util.Date;
 public class ReservationFileHandler {
 
 	private static BufferedReader br = null;
-	public static ArrayList<Reservation> activeResList = new ArrayList<Reservation>();
+	public static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
+	
 	
 	public ReservationFileHandler() {
 	}
 	
 	public static boolean loadReservations(String inFileName) {
+		// Insert a dummy reservation at index 0 to avoid error when adding new reservations into allReservationsList
+		//allReservationsList.add(0, new Reservation(null, null));
+		
 		try {
 				br = new BufferedReader(new FileReader(inFileName));
 				String line = null;
@@ -31,7 +35,9 @@ public class ReservationFileHandler {
 					printLine(tmp);
 					r = parseLine(tmp);
 					if (r != null) {
-						activeResList.add(r);
+						int id = r.getReservationId();
+						System.out.println("Get ID " + id);
+						allReservationsList.add(r);
 					}
 				}
 		}
@@ -65,8 +71,11 @@ public class ReservationFileHandler {
 			s[i] = s[i].trim();
 		}
 			
-		Reservation r1 = new Reservation();
-		r1.setReservationId(s[0]);
+		Reservation r1 = new Reservation(null, null);
+		System.out.println("SID " + s[0]);
+		int id = Integer.valueOf(s[0]);
+		System.out.println("ID " + id);
+		r1.setReservationId(id);
 		
 		Owner o1 = new Owner();  // TO DO: Create new Owner or get the Owner??
 		o1.setName(s[1]);
@@ -77,15 +86,13 @@ public class ReservationFileHandler {
 			Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(s[7]);  
 			r1.setBeginDate(date1);
 			Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(s[8]); 
-			r1.setEndDate(date2);
+		//	r1.setEndDate(date2);
 		}
 		catch (ParseException pe) {
 			pe.printStackTrace();
 		}
-		
-	    
-	    
-	    Animal a1 = new Animal();
+				
+	    Animal a1 = null;
 	    if (s[9].equalsIgnoreCase("dog")) {
 	    	 a1 = new Dog();
 	    	 if (s.length > 16) {
@@ -101,17 +108,17 @@ public class ReservationFileHandler {
 	    
 	    a1.setPetName(s[10]);
 	    a1.setSex(s[11].charAt(0));
-	    a1.setSize(Integer.parseInt(s[12]));
+	    a1.setWeight(s[12].charAt(0));
 	    a1.setBreed(s[13].toUpperCase().charAt(0));
-	    a1.setAge(Integer.parseInt(s[14]));
-	   
-	    r1.setFoodOption(Integer.parseInt(s[15]));	   
+	    a1.setAge(Integer.parseInt(s[14]));	 
+	    
+	    r1.setFoodOption(s[15].charAt(0));	   
 	    if (s.length > 18) 
-	    	r1.setCageNum(Integer.parseInt(s[18]));	 
+	    	r1.setCageNumber(Integer.parseInt(s[18]));	 
 	    if (s.length > 19)
-	    	r1.setOwnerInstructions(s[19]);
+	    	r1.setOwnerInstruction(s[19]);
 	    if (s.length > 20)
-	    	r1.setAttendantComments(s[20]);
+	    	r1.setCareTakerComment(s[20]);
 	    r1.setOwner(o1);
 	    r1.setAnimal(a1);
 	    
@@ -126,8 +133,6 @@ public class ReservationFileHandler {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	//	ReservationFileHandler h = new ReservationFileHandler();
 		ReservationFileHandler.loadReservations("Reservations2022.txt");
 	}
 

@@ -1,35 +1,59 @@
 package pethotel;
 
-public abastract class Animal {
+public abstract class Animal {
+	// Constants definitions:
+	
+	// The default and generic animal breeds are defined here.
+	// Subclasses should add more breed choices (e.g. Golden Retriever,
+	// Husky, etc. for Dogs and Tabby, Persian, etc. for Cats). 
+	// Subclasses must implement 2 abstract methods: getPetType(), setSpecies() and getSpecies()
+	public static final char BREED_UNKNOWN = 'U';
+	public static final char BREED_MIXED = 'M';
+	
+	public static final char SEX_MALE = 'M';
+	public static final char SEX_FEMALE = 'F';
+	
+	public static final char WEIGHT_SMALL = 'S';
+	public static final char WEIGHT_MEDIUM = 'M';
+	public static final char WEIGHT_LARGE = 'L';
+	public static final char WEIGHT_EXLARGE = 'X';
+	
 	
 	//data fields
-	private String petName, species, ownerName;
-	private char sex;
-	private int weight, reservation, static count = 1, id;
-	private double bill;
+	
+	protected String petName;
+	protected char breed;
+	protected char sex;
+	protected int age;
+	protected char weight;
+	protected Owner owner;
+	
 	
 	//constructors
-	public Animal(String ownerName, String petName) {
-		
-		this.ownerName = ownerName;
+	public Animal() {
+		this.breed = BREED_UNKNOWN;
+	}
+	
+	public Animal(Owner owner, String petName) {		
+		this.owner = owner;
 		this.petName = petName;
 	}
-	public Animal(String ownerName, String petName, String species, int weight, char sex) {
-		
-		this.ownerName = ownerName;
+	
+	public Animal(Owner owner, String petName, char breed, char weight, char sex) {		
+		this.owner = owner;
 		this.petName = petName;
-		this.species = species;
+		this.breed = breed;
 		this.weight = weight;
 		this.sex = sex;
 	}
 	
 	//setters and getters
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 	
-	public String getOwnerName() {
-		return ownerName;
+	public Owner getOwner() {
+		return owner;
 	}
 	
 	public void setPetName(String petName) {
@@ -40,19 +64,27 @@ public abastract class Animal {
 		return petName;
 	}
 	
-	public void setSpecies(String species) {
-		this.species = species;
+	public abstract String getPetType();
+	
+	public abstract void setBreed(char breed);
+	
+	public abstract char getBreed();
+	
+	public abstract String getBreedString();
+	
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
-	public String getSpecies() {
-		return species;
+	public int getAge() {
+		return age;
 	}
 	
-	public void setWeight(int weight) {
+	public void setWeight(char weight) {
 		this.weight = weight;
 	}
 	
-	public int getWeight() {
+	public char getWeight() {
 		return weight;
 	}
 	
@@ -64,14 +96,5 @@ public abastract class Animal {
 		return sex;
 	}
 	
-	//methods
-	public void makeId() {
-		id = count;
-		count++;
-	}
 	
-	public int getId() {
-		return id;
-	}
 }
-
