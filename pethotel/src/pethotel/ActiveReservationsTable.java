@@ -94,7 +94,7 @@ public class ActiveReservationsTable implements ListSelectionListener {
 				data[1] = dateFormatter.format(currRes.getBeginDate());
 				data[2] = dateFormatter.format(currRes.getEndDate());
 				data[3] = currRes.getAnimal().getSpecies();
-				data[4] = currRes.getAnimal().getPetName();
+				data[4] = currRes.getAnimal().getName();
 	    		data[5] = currRes.getOwner().getName();
 	    		data[6] = currRes.getAnimal().getBreedString();
 	    		data[7] = currRes.getReservationId();

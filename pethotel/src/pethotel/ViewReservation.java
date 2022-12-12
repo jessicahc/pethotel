@@ -394,9 +394,9 @@ public class ViewReservation implements ActionListener{
 	
 	public void setReservationInfo() {
 		if (reservation != null)
-			id.setText("Reservation 00" + Integer.toString(reservation.getReservationId()));
+			id.setText("Reservation " + Integer.toString(reservation.getReservationId()));
 		else 
-			id.setText("Reservation 00?");
+			id.setText("Reservation ?");
 		
 		setStatusInfo();
 		
@@ -436,6 +436,7 @@ public class ViewReservation implements ActionListener{
 				breedList.setSelectedItem(d.getBreedString());
 				
 				int maxWalkTime = (d.getMaxWalkingTime());
+				wtime.setEnabled(true);
 				wtime.setText(Integer.toString(maxWalkTime));
 			}
 			else if (type.equalsIgnoreCase(cat.getText())) { //For Cat
@@ -449,9 +450,9 @@ public class ViewReservation implements ActionListener{
 				breedList.setSelectedItem(c.getBreedString());
 				
 				// Disable the input text field "Dot's Max Walking Time" since this is a cat
-				wtime.setEditable(false);
+				wtime.setEnabled(false);
 			}
-			petname.setText(a.getPetName());
+			petname.setText(a.getName());
 			
 			char sex = a.getSex();
 			if (sex == Animal.SEX_MALE)
@@ -462,12 +463,12 @@ public class ViewReservation implements ActionListener{
 			int age = a.getAge();
 			ages.setSelectedIndex(age-1);
 			
-			int weight = a.getWeight();
+			int weight = a.getSize();
 			switch (weight) {
-				case Animal.WEIGHT_SMALL: lower.setSelected(true); break;
-				case Animal.WEIGHT_MEDIUM: ulower.setSelected(true); break;
-				case Animal.WEIGHT_LARGE:  higher.setSelected(true); break;
-				case Animal.WEIGHT_EXLARGE: uhigher.setSelected(true); break;
+				case Animal.SIZE_SMALL: lower.setSelected(true); break;
+				case Animal.SIZE_MEDIUM: ulower.setSelected(true); break;
+				case Animal.SIZE_LARGE:  higher.setSelected(true); break;
+				case Animal.SIZE_EXLARGE: uhigher.setSelected(true); break;
 			}	
 		}
 		
@@ -533,7 +534,7 @@ public class ViewReservation implements ActionListener{
 			reservation.setAnimal(pet);
 		}
 		
-		pet.setPetName(petname.getText());
+		pet.setName(petname.getText());
 		
 		if (male.isSelected())
 			pet.setSex(Animal.SEX_MALE);
@@ -545,13 +546,13 @@ public class ViewReservation implements ActionListener{
 		pet.setBreed((String)breedList.getSelectedItem());
 		
 		if (lower.isSelected())
-			pet.setWeight(Animal.WEIGHT_SMALL);
+			pet.setSize(Animal.SIZE_SMALL);
 		else if (ulower.isSelected())
-			pet.setWeight(Animal.WEIGHT_MEDIUM);
+			pet.setSize(Animal.SIZE_MEDIUM);
 		else if (higher.isSelected())
-			pet.setWeight(Animal.WEIGHT_LARGE);
+			pet.setSize(Animal.SIZE_LARGE);
 		else if (uhigher.isSelected())
-			pet.setWeight(Animal.WEIGHT_EXLARGE);
+			pet.setSize(Animal.SIZE_EXLARGE);
 		
 		if (ofood.isSelected())
 			reservation.setFoodOption(Reservation.FOOD_FROM_OWNER);
@@ -627,6 +628,7 @@ public class ViewReservation implements ActionListener{
 			Object o = e.getSource();
 			if (e.getSource() == dog) {
 				setDogBreedList();
+				wtime.setEnabled(true);
 			}
 			else if (e.getSource() == cat) {
 				setCatBreedList();

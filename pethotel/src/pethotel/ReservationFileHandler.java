@@ -101,9 +101,9 @@ public class ReservationFileHandler {
 	    	}
 	    }
 	    
-	    a1.setPetName(s[10]);
+	    a1.setName(s[10]);
 	    a1.setSex(s[11].toUpperCase().charAt(0));
-	    a1.setWeight(Integer.parseInt(s[12]));
+	    a1.setSize(Integer.parseInt(s[12]));
 	    a1.setBreed(Integer.parseInt(s[13]));
 	    a1.setAge(Integer.parseInt(s[14]));	 
 	    
