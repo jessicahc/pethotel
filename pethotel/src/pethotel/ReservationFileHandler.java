@@ -9,8 +9,7 @@ import java.util.Date;
 public class ReservationFileHandler {
 
 	private static BufferedReader br = null;
-	public static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
-	
+
 	
 	public ReservationFileHandler() {
 	}
@@ -37,7 +36,7 @@ public class ReservationFileHandler {
 					if (r != null) {
 						int id = r.getReservationId();
 						System.out.println("Get ID " + id);
-						allReservationsList.add(r);
+						Reservation.allReservationsList.add(r);
 					}
 				}
 		}
@@ -79,18 +78,14 @@ public class ReservationFileHandler {
 		
 		Owner o1 = new Owner();  // TO DO: Create new Owner or get the Owner??
 		o1.setName(s[1]);
-		o1.setAddress(s[2]+","+s[3]+","+s[4]+","+s[5]);
+		o1.setAddress(s[2]);
+		o1.setCity(s[3]);
+		o1.setState(s[4]);
+		o1.setZipCode(s[5]);
 		o1.setPhone(s[6]);
 		
-		try {
-			Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(s[7]);  
-			r1.setBeginDate(date1);
-			Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(s[8]); 
-		//	r1.setEndDate(date2);
-		}
-		catch (ParseException pe) {
-			pe.printStackTrace();
-		}
+		r1.setBeginDate(s[7]);
+		r1.setEndDate(s[8]);
 				
 	    Animal a1 = null;
 	    if (s[9].equalsIgnoreCase("dog")) {
@@ -107,21 +102,24 @@ public class ReservationFileHandler {
 	    }
 	    
 	    a1.setPetName(s[10]);
-	    a1.setSex(s[11].charAt(0));
-	    a1.setWeight(s[12].charAt(0));
-	    a1.setBreed(s[13].toUpperCase().charAt(0));
+	    a1.setSex(s[11].toUpperCase().charAt(0));
+	    a1.setWeight(Integer.parseInt(s[12]));
+	    a1.setBreed(Integer.parseInt(s[13]));
 	    a1.setAge(Integer.parseInt(s[14]));	 
 	    
 	    r1.setFoodOption(s[15].charAt(0));	   
 	    if (s.length > 18) 
 	    	r1.setCageNumber(Integer.parseInt(s[18]));	 
-	    if (s.length > 19)
-	    	r1.setOwnerInstruction(s[19]);
-	    if (s.length > 20)
-	    	r1.setCareTakerComment(s[20]);
+	    if (s.length > 19) {
+	    	if (!s[19].equals("-1"))
+	    		r1.setOwnerInstruction(s[19]);
+	    }
+	    if (s.length > 20) {
+	    	if (!s[20].equals("-1"))
+	    		r1.setCareTakerComment(s[20]);
+	    }
 	    r1.setOwner(o1);
 	    r1.setAnimal(a1);
-	    
 	    return r1;
 	}
 	

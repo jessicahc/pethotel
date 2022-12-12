@@ -5,30 +5,33 @@ public class Cat extends Animal {
 	
 	// All constants are defined here:
 	
-	// Cat-specific breeds
-	public static final char CAT_RUSSIAN_BLUE = 'R';
-	public static final char CAT_PERSIAN = 'P';
-	public static final char CAT_BRITISH_SHORTHAIR = 'B';
-	public static final char CAT_AMERICAN_SHORTHAIR = 'A';
-	public static final char CAT_EXOTIC_SHORTHAIR = 'E';
-	public static final char CAT_MAINECOON = 'O';
-	public static final char CAT_SPHYNX = 'Y';
-	public static final char CAT_SIAMESE = 'S';
-	public static final char CAT_RAGDOLL = 'D';
-	public static final char CAT_MIXED = 'X';
-	public static final char CAT_UNKNOWN = 'U';
-	
 	public static final String[] CAT_BREED_LIST = new String[] 
-			{"American Shorthair", "British Shorthair", "Exotic Shorthair", "Mainecoon", 
-			 "Persian", "Ragdoll", "Russian Blue",  "Sphynx", "Siamese", "Mixed", "Unknown"};
+			{"Unknown", "Mixed", "American Shorthair", "British Shorthair", "Exotic Shorthair", "Mainecoon", //index 0-5
+			 "Persian", "Ragdoll", "Russian Blue",  "Sphynx", "Siamese", //index 6-10
+			 "Other"};
 	
-	private char breed;
+	// Cat breeds: each assigned int MUST MATCH CAT_BREED_LIST's index number
+	// for setBreed() and getBreed() to work
+	public static final int CAT_UNKNOWN = 0;
+	public static final int CAT_MIXED = 1;
+	public static final int CAT_AMERICAN_SHORTHAIR = 2;
+	public static final int CAT_BRITISH_SHORTHAIR = 3;
+	public static final int CAT_EXOTIC_SHORTHAIR = 4;
+	public static final int CAT_MAINECOON = 5;
+	public static final int CAT_PERSIAN = 6;
+	public static final int CAT_RAGDOLL = 7;
+	public static final int CAT_RUSSIAN_BLUE = 8;
+	public static final int CAT_SPHYNX = 9;
+	public static final int CAT_SIAMESE = 10;
+	public static final int CAT_OTHER = 11;
 	
+
 	private boolean humanReactive;
 	private boolean animalReactive;
 	
 	private int litterStationNum;
 	
+
 	public Cat() {
 		super();
 		this.breed = CAT_UNKNOWN;
@@ -40,55 +43,42 @@ public class Cat extends Animal {
 		this.humanReactive = human;
 		animalReactive = animal;
 	}
+
+	//getters and setters
 	
-	public String getPetType() {
+	public String getSpecies() {
 		return "Cat";
 	}
 	
-	public String getBreedString() {
-		switch (this.breed) {
-			case CAT_RUSSIAN_BLUE: return "Russian Blue";  
-			case CAT_PERSIAN: return "Persian";  
-			case CAT_BRITISH_SHORTHAIR: return "British Shorthair";  
-			case CAT_AMERICAN_SHORTHAIR: return "American Shorthair";  
-			case CAT_EXOTIC_SHORTHAIR: return "Exotic Shorthair";  
-			case CAT_MAINECOON: return "Mainecoon";  
-			case CAT_SPHYNX: return "Sphynx"; 
-			case CAT_SIAMESE: return "Siamese";  
-			case CAT_RAGDOLL: return "Ragdoll";
-			case CAT_MIXED: return "Mixed";
-			default: return "Unknown";
+	
+	public void setBreed(int breed) {
+		if (breed >= 0 && breed <= CAT_BREED_LIST.length)
+			this.breed = breed;
+		else
+			System.err.println("Cat: invalid breed provided " + breed);
+	}
+	
+	public void setBreed(String breed) {
+		for (int i=0; i < CAT_BREED_LIST.length; i++) {
+			if (CAT_BREED_LIST[i].equalsIgnoreCase(breed)) {
+				this.breed = i;
+			}
 		}
 	}
 	
-	//getters and setters
-	public void setBreed(char breed) {
-		switch (breed) {
-			case CAT_RUSSIAN_BLUE:  
-			case CAT_PERSIAN: 
-			case CAT_BRITISH_SHORTHAIR:   
-			case CAT_AMERICAN_SHORTHAIR:   
-			case CAT_EXOTIC_SHORTHAIR:   
-			case CAT_MAINECOON:  
-			case CAT_SPHYNX: 
-			case CAT_SIAMESE:
-			case CAT_RAGDOLL: 
-			case CAT_MIXED:			
-			case BREED_MIXED:
-			case BREED_UNKNOWN:
-				this.breed = breed;
-				break;
-			default: // Unrecognized breed
-				System.out.println("Cat: invalid breed provided " + breed);
-				break;
-		}
-		
-	}
-	
-	public char getBreed() {
+	public int getBreed() {
 		return breed;
 	}
-	
+
+	public String getBreedString() {
+		if (breed >= 0 && breed <= CAT_BREED_LIST.length)
+			return CAT_BREED_LIST[breed];
+		else {
+			System.err.println("Cat.getBreedString(): cannot convert invalid breed to string" + breed);
+			return null;
+		}
+	}
+
 	public void setLitterStationNum(int i) {
 		if (i > 0)
 			this.litterStationNum = i;

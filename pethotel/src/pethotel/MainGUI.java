@@ -23,7 +23,7 @@ public class MainGUI implements ActionListener {
 	JButton btnViewInactiveRes;
 	
 	//NewReservation newReservationForm;   // Integrate with Vighnesh's code
-	//ViewReservation viewReservationForm; // Integrate with Vighnesh's code
+	ViewReservation viewReservationForm; // Integrate with Vighnesh's code
 	ActiveReservationsTable activeReservationsTable;
 	InactiveReservationsTable inactiveReservationsTable;
 	Reservation lastSelectedReservation = null;
@@ -134,24 +134,23 @@ public class MainGUI implements ActionListener {
 	}
 	
 	
-	protected void displayViewModifyReservation(ActionEvent e) {
-	 /* TODO: this code will be re-enabled when ViewReservation class is ready
+	protected void displayViewModifyReservation(ActionEvent e) {	 
 		if (lastSelectedReservation != null)
-			viewReservation = new ViewModifyReservation(lastSelectedReservation);
+			viewReservationForm = new ViewReservation(lastSelectedReservation);
 		else {
 			JOptionPane.showMessageDialog(mainFrame, "No Reservation Selected! Please select a reservation first.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-	*/
+	
 		mainPanel.removeAll();
-		//TODO: Temporary - this JLabel will be replaced by NewReservation object's content panel
-		JLabel tmpLabel = new JLabel("View/Modify Reservation Form will be displayed here");				
-		//JComponent component = viewReservation.getContent();
+		viewReservationForm = new ViewReservation(lastSelectedReservation);
+		JComponent component = viewReservationForm.getContent();
+		
 		JLabel lblNewRes = new JLabel(" View or Modify a Reserveration:");
 		lblNewRes.setFont(FONT_CONTENT);
 		mainPanel.add(BorderLayout.NORTH, lblNewRes);
-		mainPanel.add(BorderLayout.CENTER, tmpLabel);
+		mainPanel.add(BorderLayout.CENTER, component);
 		 
 		mainPanel.validate();
 		mainPanel.repaint();		

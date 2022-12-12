@@ -1,30 +1,58 @@
 package pethotel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 public class Reservation{
 
 	// All constants are defined here:
+	
 	public static final char FOOD_FROM_OWNER = 'O';
 	public static final char FOOD_FROM_HOTEL = 'H';
 	
-	// A shared static ID counter for generating ID numbers for all
-	// reservations within the program
+	public static final boolean CAGENUM_AVAILABLE = true;
+	public static final boolean CAGENUM_OCCUPIED = false;
+	
+	public static final char STATUS_ACTIVE = 'A';
+	public static final char STATUS_UPCOMING = 'U';
+	public static final char STATUS_EXPIRED = 'E';
+	public static final char STATUS_CANCELLED = 'C';
+	
+	// A date formatter to format and convert reservation dates
+	public static SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+	
+	// A shared static ID counter for generating ID numbers for all reservations within the program
 	private static int idCounter = 0;
+	
+	// A list of all reservations including active, upcoming, expired and cancelled
+	public static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
+	
+	// A list of cages for keeping track of available cages to be assigned to new reservations.
+	// Cage numbers correspond to cageList's index number from 0-24
+	public static boolean[] cageList = new boolean[25];
+	static {
+		for (int i = 0; i < cageList.length; i++)
+			cageList[i] = CAGENUM_AVAILABLE;
+	}
+	
+	// Today's date for comparing to reservation's endDate to determine reservation's isActive status
+	public static Date todayDate = new Date();
 	
 	private Bill bill;
 	private int reservationId;
 	private Owner owner;
 	private Animal animal;
-	private int lengthOfStay;
-	private Date beginDate = new Date();
-	private Date endDate = new Date();
+	private Date beginDate;
+	private Date endDate;
 	private int cageNumber;
 	private char foodOption;
 	private boolean isActive;
+	private char status;
 	private String ownerInstruction;
 	private String careTakerComment;
 
@@ -33,7 +61,9 @@ public class Reservation{
 		setReservationId(makeId());
 		this.owner = owner;
 		this.animal = animal;
-		isActive = true;		
+		this.cageNumber = -1;
+		isActive = true;
+		status = STATUS_ACTIVE;
 	}
 
 	public Reservation(Owner owner, Animal animal, Date beginDate, Date endDate){
@@ -42,16 +72,8 @@ public class Reservation{
 		this.animal = animal;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		//this.lengthOfStay = calculateLengthOfStay(beginDate, endDate);
-		this.isActive = true;
-		/*
-		if (animal.getSpecies() == "cat"){
-			bill = new Bill(75);
-		}
-		else if (animal.getSpecies() == "dog"){
-			bill = new Bill(100);
-		}
-		*/		
+		setStatus();
+		this.cageNumber = -1;
 	}
 
 	// Generate the next ID number for a new reservation
@@ -60,13 +82,13 @@ public class Reservation{
 	}
 		
 		
-	public int calculateLengthOfStay(Date beginDate, Date endDate){
-		//long timeDiff = (endDate.getDate() - beginDate.getDate());
-		//int daysdiff = (int) (timeDiff / (1000 * 60 * 60 * 24));
+	public int calculateLengthOfStay(){
+		long timeDiff = (endDate.getTime() - beginDate.getTime());
+		int daysdiff = (int) (timeDiff / (1000 * 60 * 60 * 24));
 		
-		//return daysdiff;		
-		return endDate.getDay() - beginDate.getDay();
+		return daysdiff;
 	}
+	
 //
 //	public Date dateConvert(String dateString) {
 //		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.BASIC_ISO_DATE);
@@ -85,7 +107,30 @@ public class Reservation{
 //		}
 		
 	}
+	
+	public boolean isValidDuration(String fromDate, String toDate) {
+		try {
+			Date from = dateFormatter.parse(fromDate);  
+			Date to = dateFormatter.parse(toDate);
+			
+			if (from.after(to))
+				return false;
+		}
+		catch (ParseException pe) {
+			pe.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 
+	// Allow user to cancel this reservation. Update reservation's status
+	public void cancel() {
+		this.status = STATUS_CANCELLED;
+		this.isActive = false;
+	}
+	
+	
 	//getters and setters
 
 	public int getReservationId() {
@@ -118,32 +163,126 @@ public class Reservation{
 		return beginDate;
 	}
 	
-	public void setBeginDate(Date beginDate){
+	public String getBeginDateString() {
+		return dateFormatter.format(beginDate);
+	}
+	
+	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
+		
+		// Update reservation's status based on the new beginDate
+		setStatus();
+	}
+	
+	public void setBeginDate(String fromDate) {
+		try {
+			Date date = dateFormatter.parse(fromDate);  
+			setBeginDate(date);
+		}
+		catch (ParseException pe) {
+			pe.printStackTrace();
+		}
 	}
 	
 	public Date getEndDate(){
 		return endDate;
 	}
 	
-	public void setEndDate(Date endDate){
-		this.endDate = endDate;
+	public String getEndDateString() {
+		return dateFormatter.format(endDate);
 	}
 	
+	public void setEndDate(Date endDate){
+		this.endDate = endDate;
+		// Update reservation's status based on the new endDate
+		setStatus();
+	}
+	
+	public void setEndDate(String toDate) {
+		try {
+			Date date = dateFormatter.parse(toDate);  
+			setEndDate(date);
+		}
+		catch (ParseException pe) {
+			pe.printStackTrace();
+		}
+	}
+		
 	public boolean isActive(){
 		return isActive;
 	}
 	
-	public void setIsActive(boolean isActive){
-		this.isActive = isActive;
+	public char getStatus() {
+		return status;
 	}
+	
+	public String getStatusString() {
+		switch (status) {
+			case STATUS_ACTIVE: return "In Progress";
+			case STATUS_UPCOMING: return "Upcoming";
+			case STATUS_EXPIRED: return "Expired";
+			case STATUS_CANCELLED: return "Cancelled";
+			default: return "TBD";
+		}
+	}
+	 
+	
+	// Calculate reservation's status based on beginDate and endDate.
+	// Do NOT change status if this reservation is already cancelled or expired.
+	// The user must create a new reservation to change the dates
+	public void setStatus() {
+		if (status == STATUS_CANCELLED || status == STATUS_EXPIRED) {
+			isActive = false;
+			return;
+		}
+		
+		// Need both beginDate and endDate info to determine status
+		if (beginDate == null || endDate == null)
+			return;
+			
+		if (beginDate.before(todayDate) && endDate.before(todayDate)) {
+			status = STATUS_EXPIRED;
+			isActive = false;
+		}
+		else if (beginDate.before(todayDate) && endDate.after(todayDate)) {
+			status = STATUS_ACTIVE;
+			isActive = true;
+		}
+		else if (beginDate.after(todayDate) && endDate.after(todayDate)) {
+			status = STATUS_UPCOMING;
+			isActive = true;
+		}
+		else
+			System.err.println("Reservation.setStatus(): Invalid beginDate & endDate " 
+					+ dateFormatter.format(beginDate) + " " + dateFormatter.format(endDate));
+	}
+	
 	
 	public int getCageNumber(){
 		return cageNumber;
 	}
 	
-	public void setCageNumber(int cageNumber){
-		this.cageNumber = cageNumber;
+	// Assign the specified cage number to this reservation if the cage number
+	// is still available, otherwise don't assign and return false
+	public boolean setCageNumber(int cageNumber){
+		if (cageNumber < 0)
+			return false;
+		
+		if (cageList[cageNumber] == CAGENUM_AVAILABLE) {
+			this.cageNumber = cageNumber;
+			cageList[cageNumber] = CAGENUM_OCCUPIED;
+			return true;
+		}
+		return false;
+	}
+	
+	public static ArrayList getAvailableCages() {
+		ArrayList<Integer> availableCageList = new ArrayList<Integer>();
+		for (int i = 0; i < cageList.length; i++) {
+			if (cageList[i] == CAGENUM_AVAILABLE)
+				availableCageList.add(i);
+		}
+		return availableCageList;
 	}
 	
 	public char getFoodOption(){
@@ -159,6 +298,10 @@ public class Reservation{
 	}
 	
 	public void setOwnerInstruction(String instruction){
+		// Add new line character after every '.' and '!' to get displayed 
+		// properly in GUI
+		if (instruction != null)
+			instruction = instruction.replace(". ", ".\n").replace("! ", "!\n");
 		this.ownerInstruction = instruction;
 	}
 	
@@ -167,6 +310,10 @@ public class Reservation{
 	}
 	
 	public void setCareTakerComment(String comment){
+		// Add new line character after every '.' and '!' to get displayed
+		// properly in GUI	
+		if (comment != null)
+			comment = comment.replace(". ", ".\n").replace("! ", "!\n");
 		this.careTakerComment = comment;
 	}
 	

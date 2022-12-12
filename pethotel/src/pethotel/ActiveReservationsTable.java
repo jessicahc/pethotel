@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 
 public class ActiveReservationsTable implements ListSelectionListener {
 	
-	String[] tblColumnNames = {"Drop-Off Date", "Pick-up Date", "Pet Type", "Pet Name", "Owner", "Breed", "Res ID"};
+	String[] tblColumnNames = {"Status", "Drop-Off Date", "Pick-up Date", "Pet Type", "Pet Name", "Owner", "Breed", "Res ID"};
 	DefaultTableModel tableModel;
 	ListSelectionModel selectionModel;
 	ActionListener guiActionListener;
@@ -28,7 +28,8 @@ public class ActiveReservationsTable implements ListSelectionListener {
 		
 		tableModel = new DefaultTableModel(tblColumnNames, 0) {
 	        @Override
-	        public Class getColumnClass(int columnIndex) {	 
+	        public Class getColumnClass(int columnIndex) {
+	        	// Treat the last column ReservationID as Integer
 	        	if (columnIndex == tblColumnNames.length-1)
 	        		return Integer.class;
 	        	else
@@ -75,30 +76,31 @@ public class ActiveReservationsTable implements ListSelectionListener {
 		int id = ((Integer)o).intValue();
 		System.out.println("ActiveResTable: selected id =" + id);
 		System.out.println("Reservation ID " + id + " is selected");
-		Reservation r = ReservationFileHandler.allReservationsList.get(id-1);
+		Reservation r = Reservation.allReservationsList.get(id-1);
 		return r;
 	}
 	
 	public void loadActiveReservations() {
 		Reservation currRes = null;
-		int resSize = ReservationFileHandler.allReservationsList.size();
+		int resSize = Reservation.allReservationsList.size();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 		
 		for (int r = 0; r < resSize; r++) {
-			currRes = ReservationFileHandler.allReservationsList.get(r);
-			//TODO: Check reservation status before adding to table
-			
-	    	 Object[] data = new Object[tblColumnNames.length];
-	    	 data[0] = dateFormatter.format(currRes.getBeginDate());
-	    	 data[1] = dateFormatter.format(currRes.getEndDate());
-	    	 data[2] = currRes.getAnimal().getPetType();
-	    	 data[3] = currRes.getAnimal().getPetName();
-	    	 data[4] = currRes.getOwner().getName();
-	    	 data[5] = currRes.getAnimal().getBreedString();
-	    	 data[6] = currRes.getReservationId();
-	    	 
-		     tableModel.addRow(data);
-	      }
+			currRes = Reservation.allReservationsList.get(r);
+		
+			if (currRes.isActive()) {
+				Object[] data = new Object[tblColumnNames.length];
+				data[0] = currRes.getStatusString();
+				data[1] = dateFormatter.format(currRes.getBeginDate());
+				data[2] = dateFormatter.format(currRes.getEndDate());
+				data[3] = currRes.getAnimal().getSpecies();
+				data[4] = currRes.getAnimal().getPetName();
+	    		data[5] = currRes.getOwner().getName();
+	    		data[6] = currRes.getAnimal().getBreedString();
+	    		data[7] = currRes.getReservationId();
+	    		tableModel.addRow(data);
+			}
+	      }	
 	}
 		
 	

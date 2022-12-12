@@ -6,26 +6,25 @@ public abstract class Animal {
 	// The default and generic animal breeds are defined here.
 	// Subclasses should add more breed choices (e.g. Golden Retriever,
 	// Husky, etc. for Dogs and Tabby, Persian, etc. for Cats). 
-	// Subclasses must implement 2 abstract methods: getPetType(), setSpecies() and getSpecies()
-	public static final char BREED_UNKNOWN = 'U';
-	public static final char BREED_MIXED = 'M';
+	// Subclasses must implement abstract methods: getPetType(), setBreed() and getBreed()
+	public static final int BREED_UNKNOWN = 0;
+	public static final int BREED_MIXED = 1;
 	
 	public static final char SEX_MALE = 'M';
 	public static final char SEX_FEMALE = 'F';
 	
-	public static final char WEIGHT_SMALL = 'S';
-	public static final char WEIGHT_MEDIUM = 'M';
-	public static final char WEIGHT_LARGE = 'L';
-	public static final char WEIGHT_EXLARGE = 'X';
+	public static final int WEIGHT_SMALL = 1;
+	public static final int WEIGHT_MEDIUM = 2;
+	public static final int WEIGHT_LARGE = 3;
+	public static final int WEIGHT_EXLARGE = 4;
 	
 	
 	//data fields
-	
-	protected String petName;
-	protected char breed;
+	protected String petName, species;
+	protected int breed; //the specific breed within an animal species
 	protected char sex;
 	protected int age;
-	protected char weight;
+	protected int weight;
 	protected Owner owner;
 	
 	
@@ -34,17 +33,18 @@ public abstract class Animal {
 		this.breed = BREED_UNKNOWN;
 	}
 	
-	public Animal(Owner owner, String petName) {		
+	public Animal(Owner owner, String petName) {
 		this.owner = owner;
 		this.petName = petName;
+		this.breed = BREED_UNKNOWN;
 	}
 	
-	public Animal(Owner owner, String petName, char breed, char weight, char sex) {		
+	public Animal(Owner owner, String petName, int breed, int weight, char sex) {		
 		this.owner = owner;
 		this.petName = petName;
-		this.breed = breed;
 		this.weight = weight;
 		this.sex = sex;
+		setBreed(breed);
 	}
 	
 	//setters and getters
@@ -64,13 +64,20 @@ public abstract class Animal {
 		return petName;
 	}
 	
-	public abstract String getPetType();
+	// Subclass must return a string name of its animal species,
+	// e.g. "Dog", "Cat", "Hamster"
+	public abstract String getSpecies();
 	
-	public abstract void setBreed(char breed);
+	public abstract void setBreed(int breed);
 	
-	public abstract char getBreed();
+	public abstract void setBreed(String breed);
 	
+	public abstract int getBreed();
+	
+	//Subclass must return a string name of its animal's specific breed,
+	// e.g. "Golden Retriever" for dog, "Persian" for cat
 	public abstract String getBreedString();
+	
 	
 	public void setAge(int age) {
 		this.age = age;
@@ -80,11 +87,11 @@ public abstract class Animal {
 		return age;
 	}
 	
-	public void setWeight(char weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 	
-	public char getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	

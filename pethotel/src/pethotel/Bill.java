@@ -30,7 +30,7 @@ public class Bill {
         this.depositAmount = depositAmount;
         this.animal = animal;
         this.reservation = reservation;
-        this.lengthOfStay = reservation.calculateLengthOfStay(reservation.getBeginDate(), reservation.getEndDate());
+        this.lengthOfStay = reservation.calculateLengthOfStay();
     }
 
     // methods
