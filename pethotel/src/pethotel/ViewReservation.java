@@ -34,6 +34,9 @@ public class ViewReservation implements ActionListener{
 	JLabel id = new JLabel();  // reservation ID
 	JLabel status = new JLabel(); // active vs. inactive
 	
+	JLabel lblDepositAmount = new JLabel("Initial Deposit Amount");
+	JTextField tfDepositAmount = new JTextField("$$",5);
+	
 	JLabel dStay = new JLabel("Duration of Stay");
 	JLabel dropOff = new JLabel("Drop-Off Date ");
 	JTextField from = new JTextField("mm/dd/yyyy", 15);
@@ -170,6 +173,7 @@ public class ViewReservation implements ActionListener{
 		status.setFont(fLarge);
 		status.setForeground(Color.RED);
 		dStay.setFont(f);
+		lblDepositAmount.setFont(fLarge);
 		owner.setFont(f);	
 		pet.setFont(f);
 		specInstr.setFont(f);
@@ -188,9 +192,16 @@ public class ViewReservation implements ActionListener{
 		gbc.insets = new Insets(20, LEFT_PADDING_SIZE, 20, 0);  //set top and bottom spacing
 		centerPanel.add(idStatusPanel,gbc);
 		
-		// Duration of Stay subtitle
+		// Initial Deposit Amount 
+		JPanel depositAmountPanel = genHorizontalComponentGroup(lblDepositAmount, tfDepositAmount);
 		gbc.gridx=0;
 		gbc.gridy=1;
+		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 12, 0);  //reset top and bottom spacing
+		centerPanel.add(depositAmountPanel,gbc);
+		
+		// Duration of Stay subtitle
+		gbc.gridx=0;
+		gbc.gridy=2;
 		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 12, 0);  //reset top and bottom spacing
 		centerPanel.add(dStay,gbc);
 		
@@ -199,18 +210,18 @@ public class ViewReservation implements ActionListener{
 		
         JPanel dropOffPanel = genHorizontalComponentGroup(dropOff, from);
 		gbc.gridx=0;
-		gbc.gridy=2;				
+		gbc.gridy=3;				
 		centerPanel.add(dropOffPanel,gbc);
 		
 		JPanel pickUpPanel = genHorizontalComponentGroup(pickUp, to);
 		gbc.gridx=0;
-		gbc.gridy=3;		
+		gbc.gridy=4;		
 		centerPanel.add(pickUpPanel,gbc);
 				
 		
 		// Owner info subtitle
 		gbc.gridx=0;
-		gbc.gridy=4;
+		gbc.gridy=5;
 		gbc.insets = new Insets(12, LEFT_PADDING_SIZE, 12, 0);  //reset top and bottom spacing
 		centerPanel.add(owner, gbc);
 		
@@ -220,13 +231,13 @@ public class ViewReservation implements ActionListener{
 		// Owner Name
 		JPanel ownerNamePanel = genHorizontalComponentGroup(name, ownerName);
 		gbc.gridx=0;
-		gbc.gridy=5;
+		gbc.gridy=6;
 		centerPanel.add(ownerNamePanel,gbc);
 		
 		// Address
 		JPanel addressPanel = genHorizontalComponentGroup(address, addr);
 		gbc.gridx=0;
-		gbc.gridy=6;
+		gbc.gridy=7;
 		centerPanel.add(addressPanel,gbc);
 		
 		// Wrap the set of label and fill-in field vertically for city, state, zip
@@ -239,20 +250,20 @@ public class ViewReservation implements ActionListener{
 		JPanel cityStateZipPanel = genHorizontalComponentGroup(cityPanel, statePanel, zipPanel);		
 		
 		gbc.gridx=0;
-		gbc.gridy=7;
+		gbc.gridy=8;
 		gbc.insets = new Insets(5, LEFT_PADDING_SIZE, 0, 0);  //reset top & bottom spacing for city, state, zip
 		centerPanel.add(cityStateZipPanel,gbc);
 		
 		// Phone
 		JPanel phonePanel = genHorizontalComponentGroup(phone, phon);
 		gbc.gridx=0;
-		gbc.gridy=8;
+		gbc.gridy=9;
 		gbc.insets = new Insets(8, LEFT_PADDING_SIZE, 10, 0);  //reset top & bottom spacing
 		centerPanel.add(phonePanel, gbc);	
 		
 		gbc.insets = new Insets(15, LEFT_PADDING_SIZE, 20, 0);  //reset top and bottom spacing
 		gbc.gridx=0;
-		gbc.gridy=9;
+		gbc.gridy=10;
 		centerPanel.add(pet,gbc);
 		
 		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 8, 0);  //reset top and bottom spacing for all pet fields
@@ -270,13 +281,13 @@ public class ViewReservation implements ActionListener{
 		
 		JPanel petTypePanel = genHorizontalComponentGroup(type, dog, cat);
 		gbc.gridx=0;
-		gbc.gridy=10;
+		gbc.gridy=11;
 		centerPanel.add(petTypePanel,gbc);
 		
 		// Pet Name
 		JPanel pnamePanel = genHorizontalComponentGroup(pname, petname);
 		gbc.gridx=0;
-		gbc.gridy=11;
+		gbc.gridy=12;
 		centerPanel.add(pnamePanel,gbc);
 				
 		// Pet Sex: male vs female
@@ -284,17 +295,17 @@ public class ViewReservation implements ActionListener{
 		groups.add(female);		
 		JPanel psexPanel = genHorizontalComponentGroup(psex, male, female);
 		gbc.gridx=0;
-		gbc.gridy=12;
+		gbc.gridy=13;
 		centerPanel.add(psexPanel,gbc);
 		
 		// Pet Age
 		gbc.gridx=0;
-		gbc.gridy=13;
+		gbc.gridy=14;
 		JPanel agePanel = genHorizontalComponentGroup(page, ages);
 		centerPanel.add(agePanel,gbc);
 		
 		gbc.gridx=0;
-		gbc.gridy=14;
+		gbc.gridy=15;
 		JPanel breedPanel = genHorizontalComponentGroup(pbreed, breedList);
 		centerPanel.add(breedPanel,gbc);
 		
@@ -311,39 +322,39 @@ public class ViewReservation implements ActionListener{
 		petSizePanel.add(uhigher);
 		
 		gbc.gridx=0;
-		gbc.gridy=15;
+		gbc.gridy=16;
 		centerPanel.add(petSizePanel,gbc);		
 		
 		groupf.add(ofood);
 		groupf.add(hfood);		
 		JPanel foodPanel = genHorizontalComponentGroup(food, ofood, hfood);
 		gbc.gridx = 0;
-		gbc.gridy = 16;
+		gbc.gridy = 17;
 		centerPanel.add(foodPanel, gbc);
 		
 		JPanel walkPanel = genHorizontalComponentGroup(walktime, wtime, minutes);
 		gbc.gridx =0;
-		gbc.gridy=17;
+		gbc.gridy=18;
 		centerPanel.add(walkPanel, gbc);
 		
 		gbc.insets = new Insets(10, LEFT_PADDING_SIZE, 5, 0);  //reset top and bottom spacing
 		
 		JPanel instrPanel = genVerticalComponentGroup(specInstr, instrAreaScrollPane, 10);		
 		gbc.gridx=0;
-		gbc.gridy=18;
+		gbc.gridy=19;
 		centerPanel.add(instrPanel,gbc);
 	
 		gbc.insets = new Insets(15, LEFT_PADDING_SIZE, 15, 0);  //reset top and bottom spacing		
 		JPanel cagePanel = genHorizontalComponentGroup(cagenum, cage, 
 							new JLabel("(To change Cage #, select a new cage number from the list)"));
 		gbc.gridx=0;
-		gbc.gridy=19;
+		gbc.gridy=20;
 		centerPanel.add(cagePanel, gbc);
 		
 		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 15, 0);  //reset top and bottom spacing
 		JPanel commentPanel = genVerticalComponentGroup(comments, commAreaScrollPane, 10);
 		gbc.gridx=0;
-		gbc.gridy=20; 
+		gbc.gridy=21; 
 		gbc.weightx = 0; gbc.weighty = 1; // Push all GUI items up
 		centerPanel.add(commentPanel,gbc);
 			
