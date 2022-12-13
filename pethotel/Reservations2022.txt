@@ -1,9 +1,9 @@
-#0-ResId, 1-Owner Name, 2-Address, 3-City, 4-State, 5-ZipCode,
-#6-Phone, 7-DropOff Date, 8-Pickup Date, 
-#9-Pet Type, 10-Pet Name, 11-Sex, 12-Weight, 13-Breed, 14-Age, 15- FoodOption, 
-#16-MaxWalkingTime, 17-LitterStation, 18-Cage#, 19-OwnerInstructions, 20-WorkerComment
-#Fields ResId...FoodOption are mandatory (index 0-15). The remaining fields are optional. Use -1 for fields with no value
-1,John Smith,123 Apple St.,New York, NY, 10932,6461234567,11/25/2022,12/01/2022,Dog,Sparky,M,2,6,2,O,90,-1,5,-1,Sparky is a lovely boy! He behaved very well during his stay at our hotel. He had 45-min walk everyday and 60-min playtime twice a day. He played well with other puppies too. 
-2,Kate Rowling,345 Janet Ave.,New York, NY, 10932,9171234567,11/28/2022,11/30/2022,Cat,Snowball,F,1,8,1,H,-1,2,-1,Snowball likes to scratch shoes
-3,Adam Kim,90-45 Lannon St,Great Neck, NY, 10234,5161234567,12/08/2022,12/15/2022,Dog,Mocha,M,4,12,3,H,45,-1,12,Mocha is allergic to chicken meat
-4,Joseph Addler,45 Poppy Dr.,Newark, NJ, 12067,3141112356,01/05/2023,02/04/2023,Cat,Princess Alexa,F,3,4,1,O,-1,1,8,Princess Alexa does not like to be touched.
+# 0-ResId, 1-DepositAmt, 2-CheckIn Date, 3-CheckOut Date, 4-Owner Name, 5-Address,
+# 6-City, 7-State, 8-ZipCode, 9-Phone, 10-Pet Type,
+# 11-Pet Name, 12-Sex, 13-Weight, 14-Breed, 15-Age, 16-FoodOption, 
+# 17-MaxWalkingTime, 18-LitterStation#, 19-Cage#, 20-OwnerInstructions, 21-WorkerComment
+# Fields ResId...FoodOption are mandatory (index 0-15). The remaining fields are optional. Use -1 for fields with no value
+1,0,11/25/2022,12/01/2022,John Smith,123 Apple St.,New York, NY, 10932,6461234567,Dog,Sparky,M,2,6,2,O,90,-1,5,-1,Sparky is a lovely boy! He behaved very well during his stay at our hotel. He had 45-min walk everyday and 60-min playtime twice a day. He played well with other puppies too. 
+2,100,11/28/2022,11/30/2022,Kate Rowling,345 Janet Ave.,New York, NY, 10932,9171234567,Cat,Snowball,F,1,8,1,H,-1,2,16,Snowball likes to scratch shoes
+3,0,12/08/2022,12/15/2022,Adam Kim,90-45 Lannon St,Great Neck, NY, 10234,5161234567,Dog,Mocha,M,4,12,3,H,45,-1,-1,Mocha is allergic to chicken meat
+4,0,01/05/2023,02/04/2023,Joseph Addler,45 Poppy Dr.,Newark, NJ, 12067,3141112356,Cat,Princess Alexa,F,3,4,1,O,-1,1,8,Princess Alexa does not like to be touched.
