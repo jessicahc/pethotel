@@ -9,11 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
  
-/**
- * A simple renderer class for JTable component, but keep the sort icons.
- * @author www.codejava.net
- *
- */
+
+ // A renderer class for JTable component that allows sorting by header columns and keep the sort icons.
 public class TableHeaderRenderer implements TableCellRenderer {
      
     private TableCellRenderer defaultRenderer;
