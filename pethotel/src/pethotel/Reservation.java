@@ -61,19 +61,17 @@ public class Reservation{
 		setReservationId(makeId());
 		this.owner = owner;
 		this.animal = animal;
-		this.cageNumber = -1;
+		this.cageNumber = -1; // default cage# to -1 (Not Assigned)
 		isActive = true;
 		status = STATUS_ACTIVE;
+		bill = new Bill(0, this);
 	}
 
 	public Reservation(Owner owner, Animal animal, Date beginDate, Date endDate){
-		setReservationId(makeId());
-		this.owner = owner;
-		this.animal = animal;
+		this(owner, animal);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		setStatus();
-		this.cageNumber = -1;
 	}
 
 	// Generate the next ID number for a new reservation
@@ -83,6 +81,9 @@ public class Reservation{
 		
 		
 	public int calculateLengthOfStay(){
+		if (beginDate == null || endDate == null)
+			return -1;
+		
 		long timeDiff = (endDate.getTime() - beginDate.getTime());
 		int daysdiff = (int) (timeDiff / (1000 * 60 * 60 * 24));
 		
@@ -317,10 +318,16 @@ public class Reservation{
 		this.careTakerComment = comment;
 	}
 	
-	public void generateBill() {
-		//TODO: when the user clicks on "Generate Bill & Report",
-		// a Bill object should be constructed here.
+	/*
+	public void setBill(double depositAmt) {
+		if (bill == null) {
+			bill = new Bill(depositAmt, this);
+		}
+		else {
+			bill.setDepositAmount(depositAmt);
+		}
 	}
+	*/
 	
 	public Bill getBill() {
 		return bill;

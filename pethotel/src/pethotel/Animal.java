@@ -20,7 +20,7 @@ public abstract class Animal {
 	
 	
 	//data fields
-	protected String name, species;
+	protected String name;
 	protected int breed; //the specific breed within an animal species
 	protected char sex;
 	protected int age;

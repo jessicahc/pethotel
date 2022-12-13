@@ -8,8 +8,8 @@ import java.awt.event.*;
 public class MainGUI implements ActionListener {
 
 	public static Font FONT_BIG_TITLE = new Font("Verdana", Font.BOLD, 24);
-	public static Font FONT_BUTTON = new Font("Verdana", Font.PLAIN, 14);
-	public static Font FONT_CONTENT = new Font("Arial", Font.BOLD, 15);
+	public static Font FONT_BUTTON = new Font("Verdana", Font.PLAIN, 15);
+	public static Font FONT_CONTENT = new Font("Verdana", Font.BOLD, 15);
 	public static Color BGCOLOR_LIGHTBLUE = new Color(159, 206, 249);
 	
 	JFrame mainFrame;
@@ -52,9 +52,9 @@ public class MainGUI implements ActionListener {
 	
 
 	public void initialize() {
-		mainFrame.setSize(300, 800);
+		mainFrame.setSize(300, 900);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//mainFrame.setLocationRelativeTo(null);
+		//mainFrame.setLocationRelativeTo(null); // doesn't work on Mac
 		
 		// Title and logo section
 		ImageIcon logoIcon = new ImageIcon("logo_sm.png");

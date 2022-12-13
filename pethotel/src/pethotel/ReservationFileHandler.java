@@ -69,57 +69,76 @@ public class ReservationFileHandler {
 		for (int i = 0; i < s.length; i++) {
 			s[i] = s[i].trim();
 		}
-			
+		
+		// Fields in Reservations<yyyy>.txt file:
+		// 0-ResId, 1-DepositAmt, 2-CheckIn Date, 3-CheckOut Date, 4-Owner Name, 5-Address,
+		// 6-City, 7-State, 8-ZipCode, 9-Phone, 10-Pet Type,
+		// 11-Pet Name, 12-Sex, 13-Size, 14-Breed, 15-Age, 16-FoodOption, 
+		// 17-MaxWalkingTime, 18-LitterStation#, 19-Cage#, 20-OwnerInstructions, 21-WorkerComment
+		
 		Reservation r1 = new Reservation(null, null);
-		System.out.println("SID " + s[0]);
 		int id = Integer.valueOf(s[0]);
-		System.out.println("ID " + id);
 		r1.setReservationId(id);
 		
-		Owner o1 = new Owner();  // TO DO: Create new Owner or get the Owner??
-		o1.setName(s[1]);
-		o1.setAddress(s[2]);
-		o1.setCity(s[3]);
-		o1.setState(s[4]);
-		o1.setZipCode(s[5]);
-		o1.setPhone(s[6]);
 		
-		r1.setBeginDate(s[7]);
-		r1.setEndDate(s[8]);
-				
+		
+		r1.setBeginDate(s[2]);
+		r1.setEndDate(s[3]);
+		
+		Owner o1 = new Owner();
+		o1.setName(s[4]);
+		o1.setAddress(s[5]);
+		o1.setCity(s[6]);
+		o1.setState(s[7]);
+		o1.setZipCode(s[8]);
+		o1.setPhone(s[9]);
+		
 	    Animal a1 = null;
-	    if (s[9].equalsIgnoreCase("dog")) {
+	    if (s[10].equalsIgnoreCase("Dog")) {
 	    	 a1 = new Dog();
 	    	 if (s.length > 16) {
-	    		 ((Dog)a1).setMaxWalkingTime(Integer.parseInt(s[16]));
+	    		 ((Dog)a1).setMaxWalkingTime(Integer.parseInt(s[17]));
 	    	 }
 	    }
-	    else if (s[9].equalsIgnoreCase("cat")) {
+	    else if (s[10].equalsIgnoreCase("Cat")) {
 	    	a1 = new Cat();
 	    	if (s.length > 17) {
-	    		((Cat)a1).setLitterStationNum(Integer.parseInt(s[17]));
+	    		((Cat)a1).setLitterStationNum(Integer.parseInt(s[18]));
 	    	}
 	    }
 	    
-	    a1.setName(s[10]);
-	    a1.setSex(s[11].toUpperCase().charAt(0));
-	    a1.setSize(Integer.parseInt(s[12]));
-	    a1.setBreed(Integer.parseInt(s[13]));
-	    a1.setAge(Integer.parseInt(s[14]));	 
+	    a1.setName(s[11]);
+	    a1.setSex(s[12].toUpperCase().charAt(0));
+	    a1.setSize(Integer.parseInt(s[13]));
+	    a1.setBreed(Integer.parseInt(s[14]));
+	    a1.setAge(Integer.parseInt(s[15]));	 
 	    
-	    r1.setFoodOption(s[15].charAt(0));	   
-	    if (s.length > 18) 
-	    	r1.setCageNumber(Integer.parseInt(s[18]));	 
-	    if (s.length > 19) {
-	    	if (!s[19].equals("-1"))
-	    		r1.setOwnerInstruction(s[19]);
-	    }
+	    r1.setFoodOption(s[16].charAt(0));	   
+	    if (s.length > 19) 
+	    	r1.setCageNumber(Integer.parseInt(s[19]));	 
 	    if (s.length > 20) {
 	    	if (!s[20].equals("-1"))
-	    		r1.setCareTakerComment(s[20]);
+	    		r1.setOwnerInstruction(s[20]);
+	    }
+	    if (s.length > 21) {
+	    	if (!s[21].equals("-1"))
+	    		r1.setCareTakerComment(s[21]);
 	    }
 	    r1.setOwner(o1);
 	    r1.setAnimal(a1);
+	    String deposit = s[1];
+		if (deposit != null) {
+			try {
+				double d = Double.parseDouble(deposit);
+				Bill bill = r1.getBill();
+				if (bill != null)
+					bill.setDepositAmount(d);
+			}
+			catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	    return r1;
 	}
 	

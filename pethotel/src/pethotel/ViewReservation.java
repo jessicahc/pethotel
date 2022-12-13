@@ -34,8 +34,8 @@ public class ViewReservation implements ActionListener{
 	JLabel id = new JLabel();  // reservation ID
 	JLabel status = new JLabel(); // active vs. inactive
 	
-	JLabel lblDepositAmount = new JLabel("Initial Deposit Amount");
-	JTextField tfDepositAmount = new JTextField("$$",5);
+	JLabel lblDepositAmount = new JLabel("Initial Deposit Amount ($)");
+	JTextField tfDepositAmount = new JTextField("$0",5);
 	
 	JLabel dStay = new JLabel("Duration of Stay");
 	JLabel dropOff = new JLabel("Drop-Off Date ");
@@ -419,6 +419,11 @@ public class ViewReservation implements ActionListener{
 			buttonCancel.setEnabled(false);
 		}
 		
+		Bill bill = reservation.getBill();
+		if (bill != null) {
+			this.tfDepositAmount.setText(String.format("%.2f", bill.getDepositAmount()));
+		}
+		
 		String beginDate = Reservation.dateFormatter.format(reservation.getBeginDate());
 		String endDate = Reservation.dateFormatter.format(reservation.getEndDate());
 		from.setText(beginDate);
@@ -512,6 +517,21 @@ public class ViewReservation implements ActionListener{
 	
 	
 	public boolean updateReservation() {
+		
+		Bill bill = reservation.getBill();
+		if (bill != null) {
+			String deposit = tfDepositAmount.getText();
+			if (deposit != null) {
+				try {
+					double d = Double.parseDouble(deposit);
+					bill.setDepositAmount(d);
+				}
+				catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		String fromDate = from.getText();
 		String toDate = to.getText();
 		
@@ -587,6 +607,23 @@ public class ViewReservation implements ActionListener{
 	}
 	
 	
+	public void generateBillReport() {
+		Bill bill = reservation.getBill();
+		
+		JPanel billPanel = bill.generateBillGUIContent();
+		
+		JFrame frame = new JFrame();
+		frame.setSize(400,600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel mainPanel = new JPanel(new BorderLayout(20, 20));
+		mainPanel.add(BorderLayout.CENTER, billPanel);
+		mainPanel.setBorder(new EmptyBorder(30, 50, 30, 50));
+		
+		frame.getContentPane().add(mainPanel);
+		frame.setVisible(true);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonUpdate) {
@@ -615,7 +652,7 @@ public class ViewReservation implements ActionListener{
 			}
 		}
 		else if (e.getSource() == buttonBill) {
-			
+			generateBillReport();
 		}
 	}
 
@@ -650,9 +687,3 @@ public class ViewReservation implements ActionListener{
 	}	
 
 }
-
-
-	
-		
-		
-		
