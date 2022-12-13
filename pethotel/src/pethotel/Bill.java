@@ -33,25 +33,25 @@ public class Bill {
     
     private String lineBillTitle =    "Pet Boarding Bill";
     private String lineBillingID =    "Billing ID: PBH000";
-    private String lineOwnerName =    "Owner Name: ";
-    private String linePetName =      "Pet Name: ";
-    private String linePetType =      "Pet Type: ";
-    private String lineCheckInDate =  "Check-In Date: ";
-    private String lineCheckOutDate = "Check-Out Date: ";
-    private String lineLengthOfStay = "Length Of Stay: ";
-    private String lineCostStay =     "Cost of Stay per Night: $";
-    private String lineCostFood =     "Cost of Food per Day: $";
-    private String lineBillAmt =      "Total Billing Amount: $";
-    private String lineDepositAmt =   "Deposit Paid:         $";
-    private String lineBalanceAmt =   "Balance Due:          $";
+    private String lineOwnerName =    "Owner Name:   ";
+    private String linePetName =      "Pet Name:     ";
+    private String linePetType =      "Pet Type:     ";
+    private String lineCheckInDate =  "Check-In Date:           ";
+    private String lineCheckOutDate = "Check-Out Date:          ";
+    private String lineLengthOfStay = "Length Of Stay:          ";
+    private String lineCostStay =     "Cost of Stay per Night:  $";
+    private String lineCostFood =     "Cost of Food per Day:    $";
+    private String lineBillAmt =      "Total Billing Amount:    $";
+    private String lineDepositAmt =   "Deposit Paid:            $";
+    private String lineBalanceAmt =   "Balance Due:             $";
 
     	
     // constructors
 
-    public Bill(double depositAmount, Reservation reservation)
+    public Bill(Reservation reservation)
     {
-        this.depositAmount = depositAmount;
-        this.reservation = reservation;
+    	this.reservation = reservation;
+        this.depositAmount = reservation.getDepositPaid();
         this.billID = makeBillID();
         
         // WARNING: DO NOT set owner, animal, lengthOfStay, etc. here until
@@ -132,7 +132,7 @@ public class Bill {
     	JPanel centerPanel = new JPanel(new GridLayout(17, 1));
     	
     	Font fontTitle = new Font("Verdana", Font.BOLD, 18);
-    	Font fontLabel = new Font("Verdana", Font.PLAIN, 15);
+    	Font fontLabel = new Font("Courier New", Font.BOLD, 15);
     	
     	JLabel lblBillTitle = new JLabel(lineBillTitle);
     	lblBillTitle.setFont(fontTitle);
@@ -193,23 +193,57 @@ public class Bill {
     {
         boolean append = true; 
         String filename = "bill-activityreport.txt";
-        FileWriter file = new FileWriter(filename, append);
-        PrintWriter writer = new PrintWriter(file);
+        
+        try {
+        	FileWriter file = new FileWriter(filename, append);
+        	PrintWriter writer = new PrintWriter(file);
 
-        writer.println("Bill:");
-        writer.println("Owner Name: " + animal.getOwner().getName());
-        writer.println("Pet name: " + animal.getName());
-        writer.println("Check-In Date: " + reservation.getBeginDate());
-        writer.println("Check-Out Date: " + reservation.getEndDate());
-        writer.println("Length of Stay: " + lengthOfStay);
-        writer.println("Cost of Stay per night: " + rate);
+        	writer.println("Bill:");
+        	writer.println("Owner Name: " + animal.getOwner().getName());
+        	writer.println("Pet name: " + animal.getName());
+        	writer.println("Check-In Date: " + reservation.getBeginDate());
+        	writer.println("Check-Out Date: " + reservation.getEndDate());
+        	writer.println("Length of Stay: " + lengthOfStay);
+        	writer.println("Cost of Stay per night: " + rate);
         
-        writer.println("Billing Amount: " + billingAmount);
-        writer.println("Deposit Amount: " + depositAmount);
-        writer.println("Balance Amount: " + balanceAmount);
+        	writer.println("Billing Amount: " + billingAmount);
+        	writer.println("Deposit Amount: " + depositAmount);
+        	writer.println("Balance Amount: " + balanceAmount);
         
-        file.close();
+        	file.close();
+        }
+        catch (IOException e) {
+        	e.printStackTrace();
+        }
     }
+    
+    public void generateBill(String filename, boolean append)
+    {
+        try {
+        	FileWriter file = new FileWriter(filename, append);
+        	PrintWriter writer = new PrintWriter(file);
+
+        	writer.println(lineBillTitle);
+        	writer.println(lineBillingID);
+        	writer.println(lineOwnerName);
+        	writer.println(linePetName);
+        	writer.println(linePetType);
+        	writer.println(lineCheckInDate);
+        	writer.println(lineCheckOutDate);
+        
+        	writer.println(lineLengthOfStay);
+        	writer.println(lineCostStay);
+        	writer.println(lineCostFood);
+        	writer.println(lineBillAmt);
+        	writer.println(lineDepositAmt);
+        	writer.println(lineBalanceAmt);
+        
+        	file.close();
+        }
+        catch (IOException e) {
+        	e.printStackTrace();
+        }
+    } 
 
     // setters & getters
 

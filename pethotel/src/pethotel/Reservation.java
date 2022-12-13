@@ -27,7 +27,7 @@ public class Reservation{
 	public static SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 	
 	// A shared static ID counter for generating ID numbers for all reservations within the program
-	private static int idCounter = 0;
+	private static int idCounter = -1;
 	
 	// A list of all reservations including active, upcoming, expired and cancelled
 	public static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
@@ -43,7 +43,7 @@ public class Reservation{
 	// Today's date for comparing to reservation's endDate to determine reservation's isActive status
 	public static Date todayDate = new Date();
 	
-	private Bill bill;
+	//private Bill bill;
 	private int reservationId;
 	private Owner owner;
 	private Animal animal;
@@ -56,15 +56,18 @@ public class Reservation{
 	private String ownerInstruction;
 	private String careTakerComment;
 
+	private double depositPaid;
+	
 	
 	public Reservation(Owner owner, Animal animal){
 		setReservationId(makeId());
 		this.owner = owner;
 		this.animal = animal;
+		this.foodOption = FOOD_FROM_OWNER;
 		this.cageNumber = -1; // default cage# to -1 (Not Assigned)
 		isActive = true;
 		status = STATUS_ACTIVE;
-		bill = new Bill(0, this);
+		depositPaid = 0;
 	}
 
 	public Reservation(Owner owner, Animal animal, Date beginDate, Date endDate){
@@ -76,10 +79,19 @@ public class Reservation{
 
 	// Generate the next ID number for a new reservation
 	private static int makeId() {
+		// Reservation ID starts from 0 to match allReservationsList's index number
 		return ++idCounter;
 	}
 		
 		
+	public static void addNewReservationToList(Reservation r) {
+		allReservationsList.add(r);
+	}
+	
+	public static Reservation getReservationFromList(int id) {
+		return allReservationsList.get(id);
+	}
+	
 	public int calculateLengthOfStay(){
 		if (beginDate == null || endDate == null)
 			return -1;
@@ -90,26 +102,28 @@ public class Reservation{
 		return daysdiff;
 	}
 	
-//
-//	public Date dateConvert(String dateString) {
-//		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.BASIC_ISO_DATE);
-//		return date;
-//	}
-//	public Date dateConvert(int dateInt) {
-//		String string = String.valueOf(dateInt);
-//		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.BASIC_ISO_DATE);
-//		return date;
-//	}
 	
-	public void checkDate(){
-//		Date current = new Date();
-//		if current.after(endDate){
-//			isActive = false;
-//		}
-		
+	/*
+	public Date dateConvert(String dateString) {
+		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.BASIC_ISO_DATE);
+		return date;
+	}
+	public Date dateConvert(int dateInt) {
+		String string = String.valueOf(dateInt);
+		LocalDate date = LocalDate.parse(string, DateTimeFormatter.BASIC_ISO_DATE);
+		return date;
 	}
 	
-	public boolean isValidDuration(String fromDate, String toDate) {
+	public void checkDate(){
+		Date current = new Date();
+		if current.after(endDate){
+			isActive = false;
+		}
+		
+	}
+	*/
+	
+	public static boolean isValidDuration(String fromDate, String toDate) {
 		try {
 			Date from = dateFormatter.parse(fromDate);  
 			Date to = dateFormatter.parse(toDate);
@@ -138,8 +152,8 @@ public class Reservation{
 		return reservationId;
 	}
 	
-	// Reservation ID should be set when Reservation's constructor is called.
-	// Don't let other classes to invoke setReservationId() directly
+	// Reservation ID should really be generated when Reservation's constructor is called if possible
+	// Only class from the same package can invoke setReservationId() directly
 	protected void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
@@ -318,18 +332,12 @@ public class Reservation{
 		this.careTakerComment = comment;
 	}
 	
-	/*
-	public void setBill(double depositAmt) {
-		if (bill == null) {
-			bill = new Bill(depositAmt, this);
-		}
-		else {
-			bill.setDepositAmount(depositAmt);
-		}
+
+	public double getDepositPaid() {
+		return this.depositPaid;
 	}
-	*/
 	
-	public Bill getBill() {
-		return bill;
+	public void setDepositPaid(double d) {
+		this.depositPaid = d;
 	}
 }

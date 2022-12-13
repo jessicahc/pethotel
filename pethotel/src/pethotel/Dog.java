@@ -3,7 +3,7 @@ package pethotel;
 public class Dog extends Animal {
 
 	// All constants are defined here:
-	
+
 	public static final String[] DOG_BREED_LIST = new String[] 
 			{"Unknown", "Mixed", "Bulldog", "Chihuahua", "Chow Chow", "Corgi", //index 0-5
 			"Dachshund", "Dalmatian", "German Sheperd", "Golden Retriever", "Great Dane", //index 6-10
@@ -90,4 +90,6 @@ public class Dog extends Animal {
 	public int getMaxWalkingTime() {
 		return this.maxWalkingTime;
 	}
+	
+	
 }

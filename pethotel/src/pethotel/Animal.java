@@ -28,10 +28,14 @@ public abstract class Animal {
 	protected Owner owner;
 	protected Reservation reservation;
 	
+	protected boolean humanReactive;
+	protected boolean animalReactive;
 	
 	//constructors
 	public Animal() {
 		this.breed = BREED_UNKNOWN;
+		this.humanReactive = false;
+		this.animalReactive = false;
 	}
 /*	
 	public Animal(Owner owner, String name) {
@@ -78,6 +82,14 @@ public abstract class Animal {
 		this.reservation = reservation;
 	}
 	
+	public void setHumanReactive(boolean a) {
+		this.humanReactive = a;
+	}
+	
+	public void setAnimalReactive(boolean a) {
+		this.animalReactive = a;
+	}
+	
 	//getters
 	public String getName() {
 		return name;
@@ -112,4 +124,13 @@ public abstract class Animal {
 	public Reservation getReservation() {
 		return reservation;
 	}
+	
+	public boolean getHumanReactive() {
+		return humanReactive;
+	}
+	
+	public boolean getAnimalReactive() {
+		return animalReactive;
+	}
+	
 }

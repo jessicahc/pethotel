@@ -52,9 +52,10 @@ public class ActiveReservationsTable implements ListSelectionListener {
 		table.setRowHeight(30);
 		table.setFont(new Font("Arial", Font.PLAIN, 14));
 		table.setSelectionBackground(Color.LIGHT_GRAY);
-		table.setSelectionForeground(Color.BLUE);	
+		table.setSelectionForeground(Color.BLUE);
 		
-		this.selectionModel = table.getSelectionModel();		
+		
+		this.selectionModel = table.getSelectionModel();
 		this.selectionModel.addListSelectionListener(this);	
 		this.guiActionListener = actionListener;
 				
@@ -66,17 +67,13 @@ public class ActiveReservationsTable implements ListSelectionListener {
 	
 	
 	public Reservation getSelectedReservation() {
-		int row = table.getSelectedRow();
-		System.out.println("ActiveResTable: selected row=" + row);
-		// Get the reservation ID of the selected row		
+		// Get the reservation ID of the selected row	
+		int row = table.getSelectedRow();		
 		Object o = table.getValueAt(row, tblColumnNames.length-1);
-		//Object o = tableModel.getValueAt(row, tblColumnNames.length-1);
-		System.out.println("ActiveResTable: selected sid =" + (Integer)o);
 		
 		int id = ((Integer)o).intValue();
-		System.out.println("ActiveResTable: selected id =" + id);
-		System.out.println("Reservation ID " + id + " is selected");
-		Reservation r = Reservation.allReservationsList.get(id-1);
+		System.out.println("ActiveReservation: Reservation ID " + id + " is selected");
+		Reservation r = Reservation.getReservationFromList(id);
 		return r;
 	}
 	

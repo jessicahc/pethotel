@@ -64,17 +64,15 @@ public class InactiveReservationsTable implements ListSelectionListener {
 	}
 	
 	public Reservation getSelectedReservation() {
-		int row = table.getSelectedRow();
-		System.out.println("INactiveResTable: selected row=" + row);
 		// Get the reservation ID of the selected row
+		int row = table.getSelectedRow();	
 		Object o = table.getValueAt(row, tblColumnNames.length-1);
-		//Object o = tableModel.getValueAt(row, tblColumnNames.length-1);
-		System.out.println("INactiveResTable: selected sid =" + (Integer)o);
-		
+			
 		int id = ((Integer)o).intValue();
-		System.out.println("INactiveResTable: selected id =" + id);
-		System.out.println("Reservation ID " + id + " is selected");
-		Reservation r = Reservation.allReservationsList.get(id-1);
+		System.out.println("ActiveReservation: Reservation ID " + id + " is selected");
+		Reservation r = Reservation.getReservationFromList(id);
+		System.out.println("ActiveReservation: Owner " + r.getOwner().getName()+ " is selected");
+		
 		return r;
 	}
 	

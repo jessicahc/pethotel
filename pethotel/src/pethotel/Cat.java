@@ -25,11 +25,8 @@ public class Cat extends Animal {
 	public static final int CAT_SIAMESE = 10;
 	public static final int CAT_OTHER = 11;
 	
-
-	private boolean humanReactive;
-	private boolean animalReactive;
 	
-	private int litterStationNum;
+	int litterStationNum;
 	
 
 	public Cat() {
@@ -88,18 +85,6 @@ public class Cat extends Animal {
 	
 	public int getLitterStationNum() {
 		return this.litterStationNum;
-	}
-	public void setHumanReactive(boolean a) {
-		this.humanReactive = a;
-	}
-	public void setAnimalReactive(boolean a) {
-		this.animalReactive = a;
-	}
-	public boolean getHumanReactive() {
-		return humanReactive;
-	}
-	public boolean getAnimalReactive() {
-		return animalReactive;
 	}
 	
 }

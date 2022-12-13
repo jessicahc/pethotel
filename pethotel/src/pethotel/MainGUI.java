@@ -8,10 +8,10 @@ import java.awt.event.*;
 public class MainGUI implements ActionListener {
 
 	public static Font FONT_BIG_TITLE = new Font("Verdana", Font.BOLD, 24);
-	public static Font FONT_BUTTON = new Font("Verdana", Font.PLAIN, 15);
-	public static Font FONT_CONTENT = new Font("Verdana", Font.BOLD, 15);
+	public static Font FONT_BUTTON = new Font("Verdana", Font.PLAIN, 14);
+	public static Font FONT_SUBTITLE = new Font("Verdana", Font.BOLD, 15);
 	public static Color BGCOLOR_LIGHTBLUE = new Color(159, 206, 249);
-	
+	public static Color FGCOLOR_DARKBLUE = new Color(32, 89, 153);
 	JFrame mainFrame;
 	JPanel menuPanel;
 	JPanel mainPanel;
@@ -22,11 +22,12 @@ public class MainGUI implements ActionListener {
 	JButton btnViewActiveRes;
 	JButton btnViewInactiveRes;
 	
-	//NewReservation newReservationForm;   // Integrate with Vighnesh's code
+	NewReservation newReservationForm;   // Integrate with Vighnesh's code
 	ViewReservation viewReservationForm; // Integrate with Vighnesh's code
 	ActiveReservationsTable activeReservationsTable;
 	InactiveReservationsTable inactiveReservationsTable;
 	Reservation lastSelectedReservation = null;
+	
 	
 	public MainGUI() {
 		mainFrame = new JFrame();
@@ -37,22 +38,26 @@ public class MainGUI implements ActionListener {
 		lblMainTitle = new JLabel("Pet Boarding Management System");		
 		
 		btnNewRes = new JButton("New Reservation");		
+		btnNewRes.setFont(FONT_BUTTON);
 		btnNewRes.addActionListener(this);
 		
 		btnViewModifyRes = new JButton("View / Modify a Reservation");
+		btnViewModifyRes.setFont(FONT_BUTTON);
 		btnViewModifyRes.addActionListener(this);
 		
 		btnViewActiveRes = new JButton("View Active Reservations");
+		btnViewActiveRes.setFont(FONT_BUTTON);
 		btnViewActiveRes.addActionListener(this);
 		
 		btnViewInactiveRes = new JButton("View Inactive Reservations");
+		btnViewInactiveRes.setFont(FONT_BUTTON);
 		btnViewInactiveRes.addActionListener(this);
 		
 	}
 	
-
+	
 	public void initialize() {
-		mainFrame.setSize(300, 900);
+		mainFrame.setSize(400, 900);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//mainFrame.setLocationRelativeTo(null); // doesn't work on Mac
 		
@@ -108,8 +113,7 @@ public class MainGUI implements ActionListener {
 	
 	
 	public void displayFrame() {
-		displayViewActiveReservations();				
-		btnViewActiveRes.setForeground(Color.BLUE);
+		displayViewActiveReservations();
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
@@ -118,25 +122,28 @@ public class MainGUI implements ActionListener {
 	protected void displayNewReservation() {
 		mainPanel.removeAll();
 		
-		//newReservation = new NewReservation();
-		//JComponent component = newReservation.getContent();
-		//TODO: Temporary - this JLabel will be replaced by NewReservation object's content panel
-		JLabel tmpLabel = new JLabel("New Reservation Form will be displayed here");
-		
+		newReservationForm = new NewReservation();
+		JComponent component = newReservationForm.getContent();
 		
 		JLabel lblNewRes = new JLabel(" Book a New Reserveration:");
-		lblNewRes.setFont(FONT_CONTENT);
+		lblNewRes.setFont(FONT_SUBTITLE);
 		mainPanel.add(BorderLayout.NORTH, lblNewRes);
-		mainPanel.add(BorderLayout.CENTER, tmpLabel);
+		mainPanel.add(BorderLayout.CENTER, component);
 		 
 		mainPanel.validate();
 		mainPanel.repaint();
+		
+		btnNewRes.setForeground(Color.blue);
+		btnViewModifyRes.setForeground(Color.BLACK);
+		btnViewActiveRes.setForeground(Color.BLACK);
+		btnViewInactiveRes.setForeground(Color.BLACK);
 	}
 	
 	
-	protected void displayViewModifyReservation(ActionEvent e) {	 
-		if (lastSelectedReservation != null)
+	protected void displayViewModifyReservation(ActionEvent e) {
+		if (lastSelectedReservation != null) {
 			viewReservationForm = new ViewReservation(lastSelectedReservation);
+		}
 		else {
 			JOptionPane.showMessageDialog(mainFrame, "No Reservation Selected! Please select a reservation first.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -144,16 +151,22 @@ public class MainGUI implements ActionListener {
 		}
 	
 		mainPanel.removeAll();
-		viewReservationForm = new ViewReservation(lastSelectedReservation);
+		//viewReservationForm = new ViewReservation(lastSelectedReservation);
 		JComponent component = viewReservationForm.getContent();
 		
 		JLabel lblNewRes = new JLabel(" View or Modify a Reserveration:");
-		lblNewRes.setFont(FONT_CONTENT);
+		lblNewRes.setFont(FONT_SUBTITLE);
 		mainPanel.add(BorderLayout.NORTH, lblNewRes);
 		mainPanel.add(BorderLayout.CENTER, component);
 		 
 		mainPanel.validate();
-		mainPanel.repaint();		
+		mainPanel.repaint();	
+		
+		btnNewRes.setForeground(Color.BLACK);
+		btnViewModifyRes.setForeground(Color.blue);
+		btnViewActiveRes.setForeground(Color.BLACK);
+		btnViewInactiveRes.setForeground(Color.BLACK);
+		
 	}
 	
 	
@@ -164,13 +177,17 @@ public class MainGUI implements ActionListener {
 		
 		JComponent component = activeReservationsTable.getContent();
 		JLabel lblActiveRes = new JLabel(" Active / Upcoming Reserverations:");
-		lblActiveRes.setFont(FONT_CONTENT);		
+		lblActiveRes.setFont(FONT_SUBTITLE);		
 		mainPanel.add(BorderLayout.NORTH, lblActiveRes);
 		mainPanel.add(BorderLayout.CENTER, component);
 		
 		mainPanel.validate();
 		mainPanel.repaint();
 		
+		btnNewRes.setForeground(Color.BLACK);
+		btnViewModifyRes.setForeground(Color.BLACK);
+		btnViewActiveRes.setForeground(Color.blue);
+		btnViewInactiveRes.setForeground(Color.BLACK);
 	}
 	
 	protected void displayViewInactiveReservations() {
@@ -180,12 +197,17 @@ public class MainGUI implements ActionListener {
 		
 		JComponent component = inactiveReservationsTable.getContent();
 		JLabel lblInactiveRes = new JLabel(" Inactive Reserverations:");
-		lblInactiveRes.setFont(FONT_CONTENT);		
+		lblInactiveRes.setFont(FONT_SUBTITLE);		
 		mainPanel.add(BorderLayout.NORTH, lblInactiveRes);
 		mainPanel.add(BorderLayout.CENTER, component);
 		
 		mainPanel.validate();
 		mainPanel.repaint();
+		
+		btnNewRes.setForeground(Color.BLACK);
+		btnViewModifyRes.setForeground(Color.BLACK);
+		btnViewActiveRes.setForeground(Color.BLACK);
+		btnViewInactiveRes.setForeground(Color.blue);
 		
 	}
 	

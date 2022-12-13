@@ -30,13 +30,13 @@ public class ReservationFileHandler {
 						continue;
 					}
 					line = line.trim();
-					tmp = line.split(",");
+					tmp = line.split(";");
 					printLine(tmp);
 					r = parseLine(tmp);
 					if (r != null) {
 						int id = r.getReservationId();
 						System.out.println("Get ID " + id);
-						Reservation.allReservationsList.add(r);
+						Reservation.addNewReservationToList(r);
 					}
 				}
 		}
@@ -73,14 +73,24 @@ public class ReservationFileHandler {
 		// Fields in Reservations<yyyy>.txt file:
 		// 0-ResId, 1-DepositAmt, 2-CheckIn Date, 3-CheckOut Date, 4-Owner Name, 5-Address,
 		// 6-City, 7-State, 8-ZipCode, 9-Phone, 10-Pet Type,
-		// 11-Pet Name, 12-Sex, 13-Size, 14-Breed, 15-Age, 16-FoodOption, 
-		// 17-MaxWalkingTime, 18-LitterStation#, 19-Cage#, 20-OwnerInstructions, 21-WorkerComment
+		// 11-Pet Name, 12-Sex, 13-Size, 14-Breed, 15-Age, 16-FoodOption, 17-IsCancelled(t or f)
+		// 18-MaxWalkingTime, 19-LitterStation#, 20-Cage#, 21-OwnerInstructions, 22-WorkerComment
 		
 		Reservation r1 = new Reservation(null, null);
 		int id = Integer.valueOf(s[0]);
 		r1.setReservationId(id);
 		
-		
+		String deposit = s[1];
+		if (deposit != null) {
+			try {
+				double d = Double.parseDouble(deposit);
+				if (d > 0) 
+					r1.setDepositPaid(d);
+			}
+			catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		r1.setBeginDate(s[2]);
 		r1.setEndDate(s[3]);
@@ -96,14 +106,14 @@ public class ReservationFileHandler {
 	    Animal a1 = null;
 	    if (s[10].equalsIgnoreCase("Dog")) {
 	    	 a1 = new Dog();
-	    	 if (s.length > 16) {
-	    		 ((Dog)a1).setMaxWalkingTime(Integer.parseInt(s[17]));
+	    	 if (s.length > 18 && !s[18].equals("-1")) {
+	    		 ((Dog)a1).setMaxWalkingTime(Integer.parseInt(s[18]));
 	    	 }
 	    }
 	    else if (s[10].equalsIgnoreCase("Cat")) {
 	    	a1 = new Cat();
-	    	if (s.length > 17) {
-	    		((Cat)a1).setLitterStationNum(Integer.parseInt(s[18]));
+	    	if (s.length > 19 && !s[19].equals("-1")) {
+	    		((Cat)a1).setLitterStationNum(Integer.parseInt(s[19]));
 	    	}
 	    }
 	    
@@ -114,31 +124,25 @@ public class ReservationFileHandler {
 	    a1.setAge(Integer.parseInt(s[15]));	 
 	    
 	    r1.setFoodOption(s[16].charAt(0));	   
-	    if (s.length > 19) 
-	    	r1.setCageNumber(Integer.parseInt(s[19]));	 
-	    if (s.length > 20) {
-	    	if (!s[20].equals("-1"))
-	    		r1.setOwnerInstruction(s[20]);
+	    
+	    char cancelled = s[17].charAt(0);
+	    if (cancelled == 't' || cancelled == 'T') { // reservation is cancelled
+	    	r1.cancel();
 	    }
+	    
+	    if (s.length > 20) 
+	    	r1.setCageNumber(Integer.parseInt(s[20]));	 
+	    
 	    if (s.length > 21) {
 	    	if (!s[21].equals("-1"))
-	    		r1.setCareTakerComment(s[21]);
+	    		r1.setOwnerInstruction(s[21]);
+	    }
+	    if (s.length > 22) {
+	    	if (!s[22].equals("-1"))
+	    		r1.setCareTakerComment(s[22]);
 	    }
 	    r1.setOwner(o1);
 	    r1.setAnimal(a1);
-	    String deposit = s[1];
-		if (deposit != null) {
-			try {
-				double d = Double.parseDouble(deposit);
-				Bill bill = r1.getBill();
-				if (bill != null)
-					bill.setDepositAmount(d);
-			}
-			catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
-		
 	    return r1;
 	}
 	
