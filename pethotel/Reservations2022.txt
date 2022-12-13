@@ -1,9 +1,12 @@
-# 0-ResId, 1-DepositAmt, 2-CheckIn Date, 3-CheckOut Date, 4-Owner Name, 5-Address,
-# 6-City, 7-State, 8-ZipCode, 9-Phone, 10-Pet Type,
-# 11-Pet Name, 12-Sex, 13-Weight, 14-Breed, 15-Age, 16-FoodOption, 
-# 17-MaxWalkingTime, 18-LitterStation#, 19-Cage#, 20-OwnerInstructions, 21-WorkerComment
-# Fields ResId...FoodOption are mandatory (index 0-15). The remaining fields are optional. Use -1 for fields with no value
-1,0,11/25/2022,12/01/2022,John Smith,123 Apple St.,New York, NY, 10932,6461234567,Dog,Sparky,M,2,6,2,O,90,-1,5,-1,Sparky is a lovely boy! He behaved very well during his stay at our hotel. He had 45-min walk everyday and 60-min playtime twice a day. He played well with other puppies too. 
-2,100,11/28/2022,11/30/2022,Kate Rowling,345 Janet Ave.,New York, NY, 10932,9171234567,Cat,Snowball,F,1,8,1,H,-1,2,16,Snowball likes to scratch shoes
-3,0,12/08/2022,12/15/2022,Adam Kim,90-45 Lannon St,Great Neck, NY, 10234,5161234567,Dog,Mocha,M,4,12,3,H,45,-1,-1,Mocha is allergic to chicken meat
-4,0,01/05/2023,02/04/2023,Joseph Addler,45 Poppy Dr.,Newark, NJ, 12067,3141112356,Cat,Princess Alexa,F,3,4,1,O,-1,1,8,Princess Alexa does not like to be touched.
+# 0-ResId; 1-DepositAmt; 2-CheckIn Date; 3-CheckOut Date; 4-Owner Name; 5-Address;
+# 6-City; 7-State; 8-ZipCode; 9-Phone; 10-Pet Type;
+# 11-Pet Name; 12-Sex; 13-Weight; 14-Breed; 15-Age; 16-FoodOption; 17-IsReserationCancelled(T/F)
+# 18-MaxWalkingTime; 19-LitterStation#; 20-Cage#; 21-OwnerInstructions; 22-WorkerComment
+# Fields ResId...FoodOption are mandatory (index 0-16). The remaining fields are optional. Use -1 for fields with no value
+0;250;12/12/2022;12/20/2022;Diana Singh;45-90 42 Ave Apt 5B; Woodside; NY; 10012;646-980-4567;Dog;Baxter;M;3;10;4;O;f;60;-1;-1;Baxter does not like to be patted on his head. 
+1;0;11/25/2022;12/01/2022;John Smith;123 Apple St.;New York;NY; 10932;646-123-4567;Dog;Sparky;M;2;6;2;O;f;90;-1;5;-1;Sparky is a lovely boy! He behaved very well during his stay at our hotel. He had 45-min walk everyday and 60-min playtime twice a day. He played well with other puppies too. 
+2;100;11/28/2022;11/30/2022;Kate Rowling;345 Janet Ave.;New York; NY; 10932;917-301-4467;Cat;Snowball;F;1;8;1;H;t;-1;2;16;Snowball likes to scratch shoes.
+3;0;12/08/2022;12/15/2022;Adam Kim;90-45 Lannon St;Great Neck; NY; 10234;516-909-2938;Dog;Mocha;M;4;12;3;H;f;45;-1;-1;Mocha is allergic to chicken meat.; Mocha had a wonderful time at our facility. He ate very well at every meal, very playful with his friends. He had 40-min walk once a day and played catch from time to time. We look forward to seeing Mocha again soon in the future.  
+4;0;01/05/2023;02/04/2023;Joseph Addler;45 Poppy Dr.;Newark; NJ; 12067;312-902-8001;Cat;Princess Alexa;F;3;4;1;O;f;-1;1;8;Princess Alexa does not like to be touched.
+5;75;10/08/2022;10/25/2022;Tyler H. Roberts;120-45 University Pl;Brooklyn; NY;11225;718-891-2235;Cat;Coco;M;1;3;2;H;f;-1;-1;10;-1;Coco is a gentle soul. She loved sun bathing and playing with other fellows. She ate and released regularly. We also trimmed her nails.  
+6;0;03/15/2023;03/22/2023;Nancy Chang;67-20 Main Street;Queens; NY; 11065;917-110-4001;Dog;PeterBoy;M;3;14;6;H;t;-1;-1;-1;-1;Client requested cancel due to family situation.
