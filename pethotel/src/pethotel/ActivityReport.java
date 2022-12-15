@@ -35,7 +35,7 @@ public class ActivityReport {
     // constructor
     public ActivityReport(Reservation reservation)
     {
-	this.reseration = reservation;
+	this.reservation = reservation;
     	if (this.reservation != null)
     		this.careWorkerComments = reservation.getCareTakerComment();
     }
