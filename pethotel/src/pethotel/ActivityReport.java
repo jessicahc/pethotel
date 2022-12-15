@@ -1,8 +1,8 @@
 // ActivityReport is responsible for generating a report for 
-// a specific reservation. The report will either be displayed 
+// a specific reservation. The report can either be displayed 
 // in GUI or save into a file. So far in the GUI version the report
 // only includes Care Taker's Comments about an animal's behavior 
-// during the animal's boarding period. This class also allows programmers
+// during its boarding period. This class also allows programmers
 // to add and display animal's play time info, which can be added to
 // the GUI version in the future.
 //
@@ -35,7 +35,7 @@ public class ActivityReport {
     // constructor
     public ActivityReport(Reservation reservation)
     {
-	this.reservation = reservation;
+		this.reservation = reservation;
     	if (this.reservation != null)
     		this.careWorkerComments = reservation.getCareTakerComment();
     }

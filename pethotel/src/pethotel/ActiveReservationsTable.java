@@ -3,8 +3,9 @@
 // reservations. The table only displays the most important info of
 // each reservation, e.g. Status, Drop-Off Date, Pick-Up Date, PetType,
 // PetName, Owner, Breed, and ReservationID. It also allows the user
-// to select a specific reservation from the table to view, modify, 
-// or cancel the reservation, or generate a bill & report for the reservation.
+// to select a specific reservation from the table to view/modify its
+// details, cancel the reservation, or generate a bill & report
+// for the reservation.
 //
 // Author: Jessica Chen
 

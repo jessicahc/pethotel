@@ -1,3 +1,14 @@
+// MainGUI is the major aggregating class that contains the logo, the main title
+// 4 menu buttons, 4 GUI screens. It controls which screen gets displayed in this
+// center content area based on user's button click. It's also responsible for
+// detecting which specific reservation is selected by the user from the Active
+// Reservations Table or the Inactive Reservations Table, and then pass on the
+// chosen Reservation object to ViewReservation object to be displayed. 
+//
+// MainGUI also contains main() method for the application to be launched
+//
+// Author: Jessica Chen
+
 package pethotel;
 
 import javax.swing.*;
@@ -7,11 +18,13 @@ import java.awt.event.*;
 
 public class MainGUI implements ActionListener {
 
+	// Constants are defined here:
 	public static Font FONT_BIG_TITLE = new Font("Verdana", Font.BOLD, 24);
 	public static Font FONT_BUTTON = new Font("Verdana", Font.PLAIN, 14);
 	public static Font FONT_SUBTITLE = new Font("Verdana", Font.BOLD, 15);
 	public static Color BGCOLOR_LIGHTBLUE = new Color(159, 206, 249);
 	public static Color FGCOLOR_DARKBLUE = new Color(32, 89, 153);
+	
 	JFrame mainFrame;
 	JPanel menuPanel;
 	JPanel mainPanel;
@@ -22,11 +35,14 @@ public class MainGUI implements ActionListener {
 	JButton btnViewActiveRes;
 	JButton btnViewInactiveRes;
 	
-	NewReservation newReservationForm;   // Integrate with Vighnesh's code
-	ViewReservation viewReservationForm; // Integrate with Vighnesh's code
+	NewReservation newReservationForm;   
+	ViewReservation viewReservationForm; 
 	ActiveReservationsTable activeReservationsTable;
 	InactiveReservationsTable inactiveReservationsTable;
-	Reservation lastSelectedReservation = null;
+	
+	// keep track of the lastest reservation selected by the user
+	// ActiveReservationsTable and InactiveReservationsTable
+	Reservation lastSelectedReservation = null; 
 	
 	
 	public MainGUI() {

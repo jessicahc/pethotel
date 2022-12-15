@@ -1,3 +1,10 @@
+// BaseReservationForm is a superclass containing GUI components
+// common in both "New Reservation" screen and "View/Modify Reservation" screen.
+// Each subclass can add its own unique GUI components and action listeners
+// to handle user interactions.
+//
+// Author: Vighnesh Dheenadhayalan, Jessica Chen
+
 package pethotel;
 
 import java.awt.BorderLayout;
@@ -199,37 +206,24 @@ public class BaseReservationForm {
 		
 		
 		int prefHeight = 30;
-		//from.setPreferredSize(new Dimension(100, prefHeight));
 		from.setFont(ftext);
-		//to.setPreferredSize(new Dimension(100, prefHeight));
 		to.setFont(ftext);
-		//ownerName.setPreferredSize(new Dimension(120, prefHeight));
 		ownerName.setFont(ftext);
-		//addr.setPreferredSize(new Dimension(180, prefHeight));
 		addr.setFont(ftext);
-		//cit.setPreferredSize(new Dimension(150, prefHeight));
 		cit.setFont(ftext);
-		//stateList.setPreferredSize(new Dimension(120, prefHeight));
 		stateList.setFont(ftext);
-		//zipc.setPreferredSize(new Dimension(50, prefHeight));
 		zipc.setFont(ftext);
-		//phon.setPreferredSize(new Dimension(100, prefHeight));
 		phon.setFont(ftext);
-		//petname.setPreferredSize(new Dimension(150, prefHeight));
 		petname.setFont(ftext);
-		//ages.setPreferredSize(new Dimension(150, prefHeight));
 		ages.setFont(ftext);
-		//breedList.setPreferredSize(new Dimension(150, prefHeight));
 		breedList.setFont(ftext);
-		//wtime.setPreferredSize(new Dimension(150, prefHeight));
 		wtime.setFont(ftext);
 		instr.setFont(ftext);
-		
 		
 		centerPanel.setLayout(new GridBagLayout());
 		
 		gbc.anchor= GridBagConstraints.NORTHWEST;
-		gbc.weightx = 1; // Push all GUI items to left to line up
+		gbc.weightx = 1; // Push all GUI items to the left to line up
 		gbc.weighty = 1; 	
 		
 		// Duration of Stay subtitle
@@ -269,7 +263,7 @@ public class BaseReservationForm {
 		gbc.gridy=5;
 		centerPanel.add(addressPanel,gbc);
 		
-		// Wrap the set of label and fill-in field vertically for city, state, zip
+		// Wrap each pair of label and text field vertically for city, state, zip
 		JPanel cityPanel = genVerticalComponentGroup(city, cit, 0);
 		JPanel statePanel = genVerticalComponentGroup(state, stateList, 0);
 		JPanel zipPanel = genVerticalComponentGroup(zip, zipc, 0);
@@ -328,12 +322,14 @@ public class BaseReservationForm {
 		gbc.gridy=12;
 		centerPanel.add(agePanel,gbc);
 		
+		// Pet Breeds List
 		breedList.addItem("Unknown");
 		JPanel breedPanel = genHorizontalComponentGroup(pbreed, breedList, 10);
 		gbc.gridx=0;
 		gbc.gridy=13;
 		centerPanel.add(breedPanel,gbc);
 		
+		// Pet Size
 		groupw.add(lower);
 		groupw.add(ulower);
 		groupw.add(higher);
@@ -351,6 +347,7 @@ public class BaseReservationForm {
 		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 15, 0);
 		centerPanel.add(petSizePanel,gbc);		
 		
+		// Pet Food
 		groupf.add(ofood);
 		groupf.add(hfood);
 		ofood.setSelected(true); // Default food option to OWNER BRINGS FOOD
@@ -359,11 +356,13 @@ public class BaseReservationForm {
 		gbc.gridy = 15;
 		centerPanel.add(foodPanel, gbc);
 		
+		// Dog's Max Walking Time
 		JPanel walkPanel = genHorizontalComponentGroup(walktime, wtime, minutes, 10);
 		gbc.gridx =0;
 		gbc.gridy=16;
 		centerPanel.add(walkPanel, gbc);
 		
+		// Human or Animal Reactive
 		grouph.add(hYes);
 		grouph.add(hNo);
 		hNo.setSelected(true); // default to not human reactive
@@ -380,6 +379,7 @@ public class BaseReservationForm {
 		gbc.gridy=18;
 		centerPanel.add(areactivePanel, gbc);
 		
+		// Owner's Special Instruction
 		JPanel instrPanel = genVerticalComponentGroup(specInstr, instrAreaScrollPane, 10);		
 		gbc.gridx=0;
 		gbc.gridy=19;

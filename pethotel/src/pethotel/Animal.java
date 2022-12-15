@@ -1,3 +1,13 @@
+// Animal is an abstract class which includes all common info about
+// a pet animal, e.g. pet name, sex, age, size, breed, etc. 
+// Since the breed info is specific to a particular animal species 
+// (Dog or Cat), each subclass must implement getBreed() and setBreed()
+// methods to access species-specific breed info. Each subclass must also
+// implement getSpecies() to return a string representation of an animal
+// species, e.g. "Dog", "Cat". This is needed by GUI classes.
+//
+// Author: Ethan Alford
+
 package pethotel;
 
 public abstract class Animal {
@@ -25,8 +35,10 @@ public abstract class Animal {
 	protected char sex;
 	protected int age;
 	protected int size;
-	protected Owner owner;
-	protected Reservation reservation;
+	
+	// Not Used
+	//protected Owner owner;
+	//rotected Reservation reservation;
 	
 	protected boolean humanReactive;
 	protected boolean animalReactive;
@@ -74,6 +86,7 @@ public abstract class Animal {
 		this.sex = sex;
 	}
 	
+	/*
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
@@ -81,6 +94,7 @@ public abstract class Animal {
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
+	*/
 	
 	public void setHumanReactive(boolean a) {
 		this.humanReactive = a;
@@ -117,6 +131,7 @@ public abstract class Animal {
 		return sex;
 	}
 	
+	/*
 	public Owner getOwner() {
 		return owner;
 	}
@@ -124,6 +139,7 @@ public abstract class Animal {
 	public Reservation getReservation() {
 		return reservation;
 	}
+	*/
 	
 	public boolean getHumanReactive() {
 		return humanReactive;

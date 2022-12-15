@@ -1,3 +1,25 @@
+// Reservation contains instances of Owner and Animal as its main data fields
+// to link a pet owner with his/her pet animal, and other reservation related
+// information, such as begin & end date, cage#, deposit paid, etc. It also
+// contains the following static variables which are shared among all Reservation
+// objects:
+//
+// idCounter - for generating a unque ID for each new reservation
+//
+// allReservationsList - an ArrayList to store all active and inactive
+//         reservations. Each reservation's ID corresponds to the index number
+//         of this array list.
+//
+// cageList - a boolean array for keeping track of the status of 25 cages that can
+//         be assigned to reservations. If a cage is assigned to a pet, it will
+//         be marked as "Occupied(false)", otherwise it will be marked as "Available(true)".
+//
+// todayDate - a Date object for comparing a reservation's beginDate and endDate
+//         against today's date in order to determine if a reservation's status
+//         is in-progress, upcoming, or expired. 
+//
+// Author: Simon Sherbet, Jessica Chen
+
 package pethotel;
 
 import java.text.ParseException;
@@ -40,7 +62,8 @@ public class Reservation{
 			cageList[i] = CAGENUM_AVAILABLE;
 	}
 	
-	// Today's date for comparing to reservation's endDate to determine reservation's isActive status
+	// Today's date for comparing to reservation's beginDate and endDate to determine
+    // reservation's active or inactive status
 	public static Date todayDate = new Date();
 	
 	//private Bill bill;

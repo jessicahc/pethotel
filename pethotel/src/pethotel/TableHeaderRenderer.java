@@ -1,3 +1,10 @@
+// TableHeaderRenderer is a GUI component for displaying
+// the column names of a table and sorting a table by columns.
+// This class is used by ActiveReservationsTable and 
+// InactiveReservationsTable.
+//
+// Author: Jessica Chen
+
 package pethotel;
 
 import java.awt.Color;

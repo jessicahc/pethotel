@@ -1,3 +1,15 @@
+// NewReservation is a subclass of BaseReservationForm, 
+// which inherits all common GUI components that are needed
+// in the "New Reservation" screen. It also contains its
+// own unique data fields for the "Save Reservation" button
+// and other GUI related components. 
+//
+// NewReservation is also an ActionListener to handle user's
+// request to save the info of a new reservation
+// when the "Save Reservation" button is clicked.
+//
+// Author: Vighnesh Dheenadhayalan
+
 package pethotel;
 
 import java.awt.BorderLayout;

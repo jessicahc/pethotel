@@ -1,3 +1,10 @@
+// Owner class contains the basic info about a pet owner,
+// such as owner's name, address, and phone number, as its
+// data fields. It also contains accessor methods for each
+// data field
+//
+// Author: Simon Sherbet
+
 package pethotel;
 
 public class Owner {

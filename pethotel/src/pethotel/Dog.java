@@ -1,3 +1,10 @@
+// Dog is a subclass of Animal class, containing Dog specific
+// attributes, such as various dog breeds, and max walking time 
+// requested by a pet owner. Dog class implements getSpecies(),
+// getBreed(), and setBreed() methods required by Animal class.
+//
+//  Author: Vighnesh Dheenadhayalan
+
 package pethotel;
 
 public class Dog extends Animal {

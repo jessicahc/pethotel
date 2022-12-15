@@ -1,3 +1,17 @@
+// InactiveReservationTable is a GUI class responsible for generating
+// a table containing all inactive (expired or cancelled)
+// reservations. The table only displays the most important info of
+// each reservation, e.g. Status, Drop-Off Date, Pick-Up Date, PetType,
+// PetName, Owner, Breed, and ReservationID. It also allows the user
+// to select a specific reservation from the table to view its details 
+// or generate a bill & report for the reservation.
+//
+// NOTE: To reduce coding complexity, users are not allowed to
+// modify any details of an inactive reservation. Users must create
+// a new reservation if they want to change dates, owner, or pet info.
+//
+// Author: Jessica Chen
+
 package pethotel;
 
 import javax.swing.*;

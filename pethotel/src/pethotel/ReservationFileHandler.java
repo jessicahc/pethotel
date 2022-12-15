@@ -1,3 +1,15 @@
+// ReservationFileHandler processes the text file "Reservation2022.txt" which
+// contains all reservations managed by the hotel and constructs the corresponding
+// Reservation objects for the system. The text file contains 1 reservation info per
+// line. Each line of reservation info is ';' delimited, containinf up to 22 fields.
+//
+// When parsing each line, the class will create an Owner, an Animal, and
+// a Reservation object and set their data fields based on the info extracted
+// from each field. After finishing parsing the line, the Reservation object will
+// get inserted into Reservation class's static array list "allReservationsList".
+//
+// Author: Jessica Chen
+
 package pethotel;
 
 import java.io.*;
@@ -14,9 +26,7 @@ public class ReservationFileHandler {
 	public ReservationFileHandler() {
 	}
 	
-	public static boolean loadReservations(String inFileName) {
-		// Insert a dummy reservation at index 0 to avoid error when adding new reservations into allReservationsList
-		//allReservationsList.add(0, new Reservation(null, null));
+	public static void loadReservations(String inFileName) {
 		
 		try {
 				br = new BufferedReader(new FileReader(inFileName));
@@ -43,26 +53,23 @@ public class ReservationFileHandler {
 		catch(FileNotFoundException fe) {
 			System.out.println("FileNotFound: " + fe.toString());
 			fe.printStackTrace();
-			return false;
 		}
 		catch(IOException ioe) {
 			System.out.println(ioe.toString());
 			ioe.printStackTrace();
-			return false;
 		}
 		finally {
 			if (br != null) {
 				try {
-						br.close();
+					br.close();
 				}
 				catch(IOException ioe) {
 					System.out.println(ioe.toString());
-					ioe.printStackTrace();
-					return false;
+					ioe.printStackTrace();					
 				}
-			}
+			}		
 		}
-		return true;
+		
 	}
 	
 	private static Reservation parseLine(String[] s) {
@@ -152,9 +159,11 @@ public class ReservationFileHandler {
 			System.out.print(s[i] + " ");
 		}
 	}
+
+/*	For testing only:
 	
 	public static void main(String[] args) {
 		ReservationFileHandler.loadReservations("Reservations2022.txt");
 	}
-
+*/
 }

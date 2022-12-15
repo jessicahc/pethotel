@@ -1,3 +1,11 @@
+// Cat is a subclass of Animal class, containing Cat specific
+// attributes, such as various cat breeds, and litter station number
+// that can be assigned to a cat during its boarding period.
+// Cat class implements getSpecies(), getBreed(), and setBreed()
+// methods required by Animal class.
+//
+//  Author: Vighnesh Dheenadhayalan
+
 package pethotel;
 
 

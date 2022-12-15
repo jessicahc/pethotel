@@ -1,3 +1,11 @@
+// Bill class is responsible for generating a bill for a specific
+// reservation. The bill includes the basic pet owner's and pet's 
+// information, billing amount, deposit paid by the pet owner, and
+// the balance due.  A bill can either be displayed in GUI or save 
+// into a file. 
+//
+// Author: Ellie Tso
+
 package pethotel;
 
 import java.awt.BorderLayout;
@@ -26,9 +34,9 @@ public class Bill {
     private double balanceAmount;
     private double rate;
     
-    Animal animal;
-    Owner  owner;
-    Reservation reservation;
+    private Reservation reservation;
+    private Animal animal;
+    private Owner  owner;   
     private int lengthOfStay;
     
     private String lineBillTitle =    "Pet Boarding Bill";
@@ -50,13 +58,13 @@ public class Bill {
 
     public Bill(Reservation reservation)
     {
-    	this.reservation = reservation;
-        this.depositAmount = reservation.getDepositPaid();
-        this.billID = makeBillID();
-        
-        // WARNING: DO NOT set owner, animal, lengthOfStay, etc. here until
+    	// WARNING: DO NOT set owner, animal, lengthOfStay, etc. here until
         // the user requests to generate the bill because these
         // data fields could get modified by the user.
+    	
+    	this.reservation = reservation;
+        this.depositAmount = reservation.getDepositPaid();
+        this.billID = makeBillID();       
     }
 
     // methods
@@ -93,9 +101,10 @@ public class Bill {
     }
 
     public void generateBillDetails() {
-    	 // Always re-calculate lengthOfState and bill amounts in case the user modifies the reservation
+    	 // Always get the latest Owner and Animal object and re-calculate 
+    	 // lengthOfStay and bill amounts in case the user modifies the reservation
     	 this.owner = reservation.getOwner();
-         this.animal = reservation.getAnimal();
+         this.animal = reservation.getAnimal();         
     	 this.lengthOfStay = reservation.calculateLengthOfStay();
     	 this.billingAmount = calculateBillingAmount();
     	 this.balanceAmount = calculateBalanceAmount();
@@ -199,7 +208,7 @@ public class Bill {
         	PrintWriter writer = new PrintWriter(file);
 
         	writer.println("Bill:");
-        	writer.println("Owner Name: " + animal.getOwner().getName());
+        	writer.println("Owner Name: " + owner.getName());
         	writer.println("Pet name: " + animal.getName());
         	writer.println("Check-In Date: " + reservation.getBeginDate());
         	writer.println("Check-Out Date: " + reservation.getEndDate());

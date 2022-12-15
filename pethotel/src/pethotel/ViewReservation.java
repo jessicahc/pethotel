@@ -1,3 +1,15 @@
+// ViewReservation is a subclass of BaseReservationForm, 
+// which inherits all common GUI components that are needed
+// in the "View/Modify Reservation" screen. It also contains its
+// own unique data fields for 3 buttons: "Update Reservation",
+// "Cancel Reservation", and "Generate Bill and Report",
+// plus other GUI related components. 
+//
+// NewReservation is also an ActionListener to handle user's
+// request when each of the 3 buttons is clicked.
+//
+// Author: Vighnesh Dheenadhayalan, Jessica Chen
+
 package pethotel;
 
 import java.awt.BorderLayout;
