@@ -198,7 +198,7 @@ public class Bill {
     }
     
     
-    public void generateBill() throws IOException
+    public void generateBill() 
     {
         boolean append = true; 
         String filename = "bill-activityreport.txt";
