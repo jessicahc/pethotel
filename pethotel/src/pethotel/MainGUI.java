@@ -261,7 +261,8 @@ public class MainGUI implements ActionListener {
 	
 	    
 	public static void main(String[] args) {
-		ReservationFileHandler.loadReservations("Reservations2022.txt");
+		ReservationFileHandler rfh = new ReservationFileHandler();
+		rfh.loadReservations("Reservations2022.txt");
 		MainGUI base = new MainGUI();
 		base.initialize();
 		base.displayFrame();

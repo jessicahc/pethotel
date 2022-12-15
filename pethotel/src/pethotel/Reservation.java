@@ -52,11 +52,11 @@ public class Reservation{
 	private static int idCounter = -1;
 	
 	// A list of all reservations including active, upcoming, expired and cancelled
-	public static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
+	private static ArrayList<Reservation> allReservationsList = new ArrayList<Reservation>(10);
 	
 	// A list of cages for keeping track of available cages to be assigned to new reservations.
 	// Cage numbers correspond to cageList's index number from 0-24
-	public static boolean[] cageList = new boolean[25];
+	private static boolean[] cageList = new boolean[25];
 	static {
 		for (int i = 0; i < cageList.length; i++)
 			cageList[i] = CAGENUM_AVAILABLE;
@@ -113,6 +113,10 @@ public class Reservation{
 	
 	public static Reservation getReservationFromList(int id) {
 		return allReservationsList.get(id);
+	}
+	
+	public static int getReservationsListSize() {
+		return allReservationsList.size();
 	}
 	
 	public int calculateLengthOfStay(){

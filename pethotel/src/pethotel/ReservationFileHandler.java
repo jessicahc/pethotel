@@ -13,20 +13,17 @@
 package pethotel;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
 
 public class ReservationFileHandler {
 
-	private static BufferedReader br = null;
+	private BufferedReader br = null;
 
 	
 	public ReservationFileHandler() {
 	}
 	
-	public static void loadReservations(String inFileName) {
+	public void loadReservations(String inFileName) {
 		
 		try {
 				br = new BufferedReader(new FileReader(inFileName));
@@ -44,8 +41,7 @@ public class ReservationFileHandler {
 					printLine(tmp);
 					r = parseLine(tmp);
 					if (r != null) {
-						int id = r.getReservationId();
-						System.out.println("Get ID " + id);
+						int id = r.getReservationId();					
 						Reservation.addNewReservationToList(r);
 					}
 				}
@@ -72,7 +68,7 @@ public class ReservationFileHandler {
 		
 	}
 	
-	private static Reservation parseLine(String[] s) {
+	private Reservation parseLine(String[] s) {
 		for (int i = 0; i < s.length; i++) {
 			s[i] = s[i].trim();
 		}
@@ -154,7 +150,7 @@ public class ReservationFileHandler {
 	}
 	
 	
-	private static void printLine(String[] s) {
+	private void printLine(String[] s) {
 		for (int i = 0; i < s.length; i++) {
 			System.out.print(s[i] + " ");
 		}

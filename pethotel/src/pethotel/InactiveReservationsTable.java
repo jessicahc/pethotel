@@ -92,11 +92,13 @@ public class InactiveReservationsTable implements ListSelectionListener {
 	
 	public void loadInactiveReservations() {
 		Reservation currRes = null;
-		int resSize = Reservation.allReservationsList.size();
+		//int resSize = Reservation.allReservationsList.size();
+		int resSize = Reservation.getReservationsListSize();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 		
 		for (int r = 0; r < resSize; r++) {
-			currRes = Reservation.allReservationsList.get(r);
+			currRes = Reservation.getReservationFromList(r);
+			//currRes = Reservation.allReservationsList.get(r);
 			
 			if (!currRes.isActive()) {
 				Object[] data = new Object[tblColumnNames.length];

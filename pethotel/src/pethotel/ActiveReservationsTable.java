@@ -90,12 +90,13 @@ public class ActiveReservationsTable implements ListSelectionListener {
 	
 	public void loadActiveReservations() {
 		Reservation currRes = null;
-		int resSize = Reservation.allReservationsList.size();
+		int resSize = Reservation.getReservationsListSize();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 		
 		for (int r = 0; r < resSize; r++) {
-			currRes = Reservation.allReservationsList.get(r);
-		
+			//currRes = Reservation.allReservationsList.get(r);
+			currRes = Reservation.getReservationFromList(r);
+			
 			if (currRes.isActive()) {
 				Object[] data = new Object[tblColumnNames.length];
 				data[0] = currRes.getStatusString();
