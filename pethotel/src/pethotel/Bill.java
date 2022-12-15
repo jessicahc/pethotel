@@ -25,7 +25,7 @@ public class Bill {
 	public static double BILLING_RATE_HOTEL_FOOD = 10.0;
 	public static double BILLING_RATE_OWNER_FOOD = 0.0;
 	
-	public static int nextBillID = 0;
+	private static int nextBillID = 0;
 	
     // fields
 	private int    billID;
