@@ -1,3 +1,13 @@
+// ActivityReport is responsible for generating a report for 
+// a specific reservation. The report will either be displayed 
+// in GUI or save into a file. So far in the GUI version the report
+// only includes Care Taker's Comments about an animal's behavior 
+// during the animal's boarding period. This class also allows programmers
+// to add and display animal's play time info, which can be added to
+// the GUI version in the future.
+//
+// Author: Ellie Tso
+
 package pethotel;
 
 import java.awt.BorderLayout;
@@ -14,6 +24,7 @@ import javax.swing.JTextPane;
 public class ActivityReport {
     
     // fields
+    private Reservation reservation;
     private double playTime;
     private String careWorkerComments;
 
@@ -24,7 +35,8 @@ public class ActivityReport {
     // constructor
     public ActivityReport(Reservation reservation)
     {
-    	if (reservation != null)
+	this.reseration = reservation;
+    	if (this.reservation != null)
     		this.careWorkerComments = reservation.getCareTakerComment();
     }
 
@@ -97,7 +109,7 @@ public class ActivityReport {
     	return panel;
     }
   
-    // generate activity report
+    // generate activity report and write to a default file
     public void generateReport()
     {
         boolean append = true; 
@@ -119,6 +131,8 @@ public class ActivityReport {
 		}     
     }
     
+    // @overload - generate activity report and write to a dedicated file
+    // for a reservation
     public void generateReport(String filename, boolean append)
     {
         try {
