@@ -34,95 +34,94 @@ public class BaseReservationForm {
 	protected static final int LEFT_PADDING_SIZE = 25; 
 	
 	//gbc object for the Layout
-	GridBagConstraints gbc = new GridBagConstraints();
+	protected GridBagConstraints gbc = new GridBagConstraints();
 			
 	//all the components being added to the centerPanel
-	Font fLarge = new Font("Verdana", Font.BOLD, 16);
-	Font f = new Font("Verdana", Font.BOLD, 15);
-	Font ftext = new Font("Verdana", Font.PLAIN, 13);
+	protected Font fLarge = new Font("Verdana", Font.BOLD, 16);
+	protected Font f = new Font("Verdana", Font.BOLD, 15);
+	protected Font ftext = new Font("Verdana", Font.PLAIN, 13);
 	
-	JLabel dStay = new JLabel("Duration of Stay");
-	JLabel dropOff = new JLabel("Drop-Off Date ");
-	JTextField from = new JTextField("mm/dd/yyyy", 15);
-	JLabel pickUp = new JLabel("Pick-Up Date   ");
-	JTextField to = new JTextField("mm/dd/yyyy", 15);
+	protected JLabel dStay = new JLabel("Duration of Stay");
+	protected JLabel dropOff = new JLabel("Drop-Off Date ");
+	protected JTextField from = new JTextField("mm/dd/yyyy", 15);
+	protected JLabel pickUp = new JLabel("Pick-Up Date   ");
+	protected JTextField to = new JTextField("mm/dd/yyyy", 15);
 	
-	JLabel owner = new JLabel("Owner Information");
+	protected JLabel owner = new JLabel("Owner Information");
 	
-	JLabel name = new JLabel("First and Last Name ");
-	JTextField ownerName = new JTextField(20);
+	protected JLabel name = new JLabel("First and Last Name ");
+	protected JTextField ownerName = new JTextField(20);
 	
-	JLabel address = new JLabel("Address ");
-	JTextField addr = new JTextField(20);
+	protected JLabel address = new JLabel("Address ");
+	protected JTextField addr = new JTextField(20);
 	
-	JLabel city = new JLabel("City ");
-	JTextField cit = new JTextField(15);
+	protected JLabel city = new JLabel("City ");
+	protected JTextField cit = new JTextField(15);
 	
-	JLabel state = new JLabel("State ");
-	JComboBox<String> stateList = new JComboBox<String>();
+	protected JLabel state = new JLabel("State ");
+	protected JComboBox<String> stateList = new JComboBox<String>();
 	
-	JLabel zip = new JLabel("Zip Code ");
-	JTextField zipc = new JTextField(10);
+	protected JLabel zip = new JLabel("Zip Code ");
+	protected JTextField zipc = new JTextField(10);
 	
-	JLabel phone = new JLabel("Phone ");
-	JTextField phon = new JTextField(15);
+	protected JLabel phone = new JLabel("Phone ");
+	protected JTextField phon = new JTextField(15);
 		
-	JLabel pet = new JLabel("Pet Information");
+	protected JLabel pet = new JLabel("Pet Information");
 	
-	JLabel type = new JLabel("Type");	
-	JRadioButton dog = new JRadioButton("Dog");
-	JRadioButton cat = new JRadioButton("Cat");
-	ButtonGroup groupa = new ButtonGroup();
+	protected JLabel type = new JLabel("Type");	
+	protected JRadioButton dog = new JRadioButton("Dog");
+	protected JRadioButton cat = new JRadioButton("Cat");
+	protected ButtonGroup groupa = new ButtonGroup();
 	
-	JLabel pname = new JLabel("Pet's Name");
-	JTextField petname = new JTextField(15);
+	protected JLabel pname = new JLabel("Pet's Name");
+	protected JTextField petname = new JTextField(15);
 	
-	JLabel psex = new JLabel("Pet's Sex");
-	JRadioButton male = new JRadioButton("M");
-	JRadioButton female = new JRadioButton("F");
-	ButtonGroup groups = new ButtonGroup();
+	protected JLabel psex = new JLabel("Pet's Sex");
+	protected JRadioButton male = new JRadioButton("M");
+	protected JRadioButton female = new JRadioButton("F");
+	protected ButtonGroup groups = new ButtonGroup();
 	
-	JLabel page = new JLabel("Pet's Age");	
-	JComboBox<String> ages = new JComboBox<String>();
+	protected JLabel page = new JLabel("Pet's Age");	
+	protected JComboBox<String> ages = new JComboBox<String>();
 	
-	JLabel pbreed = new JLabel("Breed");	
-	JComboBox<String> breedList = new JComboBox<String>();
+	protected JLabel pbreed = new JLabel("Breed");	
+	protected JComboBox<String> breedList = new JComboBox<String>();
 	
-	JLabel psize = new JLabel("Pet's Size (lbs)");
-	JRadioButton lower = new JRadioButton("0-15");
-	JRadioButton ulower = new JRadioButton("16-30");
-	JRadioButton higher = new JRadioButton("31-50");
-	JRadioButton uhigher = new JRadioButton("50+");
-	ButtonGroup groupw = new ButtonGroup();
+	protected JLabel psize = new JLabel("Pet's Size (lbs)");
+	protected JRadioButton lower = new JRadioButton("0-15");
+	protected JRadioButton ulower = new JRadioButton("16-30");
+	protected JRadioButton higher = new JRadioButton("31-50");
+	protected JRadioButton uhigher = new JRadioButton("50+");
+	protected ButtonGroup groupw = new ButtonGroup();
 	
-	JLabel food = new JLabel("Food");
-	JRadioButton ofood = new JRadioButton("Owner Brings Food");
-	JRadioButton hfood = new JRadioButton("Hotel Provides Food (add $" +
+	protected JLabel food = new JLabel("Food");
+	protected JRadioButton ofood = new JRadioButton("Owner Brings Food");
+	protected JRadioButton hfood = new JRadioButton("Hotel Provides Food (add $" +
 								String.format("%.0f", Bill.BILLING_RATE_HOTEL_FOOD) + " per day)");
-	ButtonGroup groupf = new ButtonGroup();
+	protected ButtonGroup groupf = new ButtonGroup();
 	
-	JLabel walktime = new JLabel("Dog's Maximum Walking Time ");
-	JTextField wtime = new JTextField(5);
-	JLabel minutes = new JLabel("(max minutes per day)");
+	protected JLabel walktime = new JLabel("Dog's Maximum Walking Time ");
+	protected JTextField wtime = new JTextField(5);
+	protected JLabel minutes = new JLabel("(max minutes per day)");
 	
-	JLabel hreactive = new JLabel("Pet Reactive (or aggressive) to Humans?");
-	JRadioButton hYes = new JRadioButton("Yes");
-	JRadioButton hNo = new JRadioButton("No");
-	ButtonGroup grouph= new ButtonGroup();
+	protected JLabel hreactive = new JLabel("Pet Reactive (or aggressive) to Humans?");
+	protected JRadioButton hYes = new JRadioButton("Yes");
+	protected JRadioButton hNo = new JRadioButton("No");
+	protected ButtonGroup grouph= new ButtonGroup();
 	
-	JLabel areactive = new JLabel("Pet Reactive (or aggressive) to Other Animals?");
-	JRadioButton aYes = new JRadioButton("Yes");
-	JRadioButton aNo = new JRadioButton("No");
-	ButtonGroup groupanimal= new ButtonGroup();
+	protected JLabel areactive = new JLabel("Pet Reactive (or aggressive) to Other Animals?");
+	protected JRadioButton aYes = new JRadioButton("Yes");
+	protected JRadioButton aNo = new JRadioButton("No");
+	protected ButtonGroup groupanimal= new ButtonGroup();
 	
-	JLabel specInstr = new JLabel("Owner's Special Instructions");
-	JTextArea instr = new JTextArea(5, 50);
-	JScrollPane instrAreaScrollPane = new JScrollPane(instr, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+	protected JLabel specInstr = new JLabel("Owner's Special Instructions");
+	protected JTextArea instr = new JTextArea(5, 50);
+	protected JScrollPane instrAreaScrollPane = new JScrollPane(instr, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 													JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-	
-	JPanel centerPanel = new JPanel(); //the panel in the center with all the input fields
-	JScrollPane bar;
+	protected JPanel centerPanel = new JPanel(); //the panel in the center with all the input fields
+	protected JScrollPane bar;
 	
 	
 	private class PetTypeListener implements ActionListener {
@@ -199,13 +198,11 @@ public class BaseReservationForm {
 		minutes.setFont(ftext);
 		hreactive.setFont(ftext);
 		hYes.setFont(ftext);
-		aNo.setFont(ftext);
+		hNo.setFont(ftext);
 		areactive.setFont(ftext);
-		hYes.setFont(ftext);
+		aYes.setFont(ftext);
 		aNo.setFont(ftext);
-		
-		
-		int prefHeight = 30;
+				
 		from.setFont(ftext);
 		to.setFont(ftext);
 		ownerName.setFont(ftext);
@@ -254,7 +251,7 @@ public class BaseReservationForm {
 		JPanel ownerNamePanel = genHorizontalComponentGroup(name, ownerName, 10);
 		gbc.gridx=0;
 		gbc.gridy=4;
-		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 8, 0);  //reset bottom spacing for owner name and address
+		gbc.insets = new Insets(0, LEFT_PADDING_SIZE, 10, 0);  //reset bottom spacing for owner name and address
 		centerPanel.add(ownerNamePanel,gbc);
 		
 		// Address
@@ -274,7 +271,7 @@ public class BaseReservationForm {
 		
 		gbc.gridx=0;
 		gbc.gridy=6;
-		gbc.insets = new Insets(5, LEFT_PADDING_SIZE, 0, 0);  //reset top & bottom spacing for city, state, zip
+		gbc.insets = new Insets(5, LEFT_PADDING_SIZE, 5, 0);  //reset top & bottom spacing for city, state, zip
 		centerPanel.add(cityStateZipPanel,gbc);
 		
 		// Phone
@@ -284,7 +281,7 @@ public class BaseReservationForm {
 		gbc.insets = new Insets(8, LEFT_PADDING_SIZE, 10, 0);  //reset top & bottom spacing
 		centerPanel.add(phonePanel, gbc);	
 		
-		gbc.insets = new Insets(15, LEFT_PADDING_SIZE, 20, 0);  //reset top and bottom spacing
+		gbc.insets = new Insets(15, LEFT_PADDING_SIZE, 15, 0);  //reset top and bottom spacing
 		gbc.gridx=0;
 		gbc.gridy=8;
 		centerPanel.add(pet,gbc);

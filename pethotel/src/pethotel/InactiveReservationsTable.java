@@ -29,13 +29,13 @@ import java.text.SimpleDateFormat;
 
 public class InactiveReservationsTable implements ListSelectionListener {
 	
-	String[] tblColumnNames = {"Status", "Drop-Off Date", "Pick-up Date", "Pet Type", "Pet Name", "Owner", "Breed", "Res ID"};
-	DefaultTableModel tableModel;
-	ListSelectionModel selectionModel;
-	ActionListener guiActionListener;
+	private String[] tblColumnNames = {"Status", "Drop-Off Date", "Pick-up Date", "Pet Type", "Pet Name", "Owner", "Breed", "Res ID"};
+	private DefaultTableModel tableModel;
+	private ListSelectionModel selectionModel;
+	private ActionListener guiActionListener;
 	
-	JTable table;
-	JScrollPane scrollPane;
+	private JTable table;
+	private JScrollPane scrollPane;
 	
 	
 	public InactiveReservationsTable(ActionListener actionListener) {

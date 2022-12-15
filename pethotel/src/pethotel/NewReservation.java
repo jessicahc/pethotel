@@ -38,10 +38,10 @@ import javax.swing.border.EmptyBorder;
 public class NewReservation extends BaseReservationForm implements ActionListener{
 	
 	//only button needed to save the new registration
-	JButton buttonSave;
+	private JButton buttonSave;
 	
-	JPanel mainPanel = new JPanel();
-	JPanel southPanel = new JPanel();
+	private JPanel mainPanel = new JPanel();
+	private JPanel southPanel = new JPanel();
 	
 	
 	public NewReservation() {

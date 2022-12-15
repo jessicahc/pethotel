@@ -36,34 +36,34 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 	public static Color FGCOLOR_DEEPRED = new Color(176, 35, 63);
 	
 	//All the Buttons in the southPanel
-	JButton buttonUpdate = new JButton();
-	JButton buttonCancel = new JButton();
-	JButton buttonBill = new JButton();
+	private JButton buttonUpdate = new JButton();
+	private JButton buttonCancel = new JButton();
+	private JButton buttonBill = new JButton();
 		
-	JLabel id = new JLabel();  // reservation ID
-	JLabel status = new JLabel(); // active vs. inactive
+	private JLabel id = new JLabel();  // reservation ID
+	private JLabel status = new JLabel(); // active vs. inactive
 	
-	JLabel lblDepositAmount = new JLabel("Initial Deposit Amount ($)");
-	JTextField tfDepositAmount = new JTextField("0.00",5);
+	private JLabel lblDepositAmount = new JLabel("Initial Deposit Amount ($)");
+	private JTextField tfDepositAmount = new JTextField("0.00",5);
 	
-	JLabel cagenum = new JLabel("Cage #");
-	JComboBox<String> cage = new JComboBox<String>();
-	JLabel cageInstr = new JLabel("(To change Cage #, select a new cage number from the list)");
+	private JLabel cagenum = new JLabel("Cage #");
+	private JComboBox<String> cage = new JComboBox<String>();
+	private JLabel cageInstr = new JLabel("(To change Cage #, select a new cage number from the list)");
 	
-	JLabel comments = new JLabel("Care Attendant's Comments");
-	JTextArea comm = new JTextArea(5, 50);
-	JScrollPane commAreaScrollPane = new JScrollPane(comm, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+	private JLabel comments = new JLabel("Care Attendant's Comments");
+	private JTextArea comm = new JTextArea(5, 50);
+	private JScrollPane commAreaScrollPane = new JScrollPane(comm, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 													JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	
-	JPanel mainpanel = new JPanel();
-	JPanel formpanel = new JPanel();
-	JPanel buttonpanel = new JPanel();
+	private JPanel mainPanel = new JPanel();
+	private JPanel formPanel = new JPanel();
+	private JPanel buttonPanel = new JPanel();
 
-	Reservation reservation;
+	private Reservation reservation;
 	
-	Bill bill;
-	ActivityReport report;
-	JButton saveFile = new JButton("Save to File");
+	private Bill bill;
+	private ActivityReport report;
+	private JButton saveFile = new JButton("Save to File");
 	
 	
 	public ViewReservation(Reservation r) {
@@ -125,12 +125,12 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 			
 		
 		//ADDING ALL THE PANELS TO THE SCROLL PANE
-		formpanel.setLayout(new BorderLayout(0, 15));
-		formpanel.setBorder(new EmptyBorder(10, 40, 0, 40));
-		formpanel.add(BorderLayout.NORTH, northPanel);
-		formpanel.add(BorderLayout.CENTER, centerPanel);
-		formpanel.add(BorderLayout.SOUTH, southPanel);
-		bar.setViewportView(formpanel);
+		formPanel.setLayout(new BorderLayout(0, 15));
+		formPanel.setBorder(new EmptyBorder(10, 40, 0, 40));
+		formPanel.add(BorderLayout.NORTH, northPanel);
+		formPanel.add(BorderLayout.CENTER, centerPanel);
+		formPanel.add(BorderLayout.SOUTH, southPanel);
+		bar.setViewportView(formPanel);
 		
 		//ALL THE SOUTHPANEL STUFFS
 		//Buttons in the south panel
@@ -148,11 +148,11 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 		buttonBill.setText("Generate Bill and Report");
 		buttonBill.addActionListener(this);
 							
-		buttonpanel.add(buttonUpdate);
-		buttonpanel.add(buttonCancel);
-		buttonpanel.add(buttonBill);
-		buttonpanel.setBorder(new EmptyBorder(5, 0, 15, 0));
-		buttonpanel.setBackground(MainGUI.BGCOLOR_LIGHTBLUE);
+		buttonPanel.add(buttonUpdate);
+		buttonPanel.add(buttonCancel);
+		buttonPanel.add(buttonBill);
+		buttonPanel.setBorder(new EmptyBorder(5, 0, 15, 0));
+		buttonPanel.setBackground(MainGUI.BGCOLOR_LIGHTBLUE);
 		
 		// Must do setReservationInfo() after all GUI items including buttons are set up
 		// otherwise might crash
@@ -162,12 +162,12 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 
 	public JComponent getContent() {
 		//ADDING ALL THE PANELS TO THE MAINPANEL
-		mainpanel.setLayout(new BorderLayout(0, 10));
-		mainpanel.add(BorderLayout.CENTER, bar);		
-		mainpanel.add(BorderLayout.SOUTH, buttonpanel);
-		mainpanel.setBackground(MainGUI.BGCOLOR_LIGHTBLUE);
+		mainPanel.setLayout(new BorderLayout(0, 10));
+		mainPanel.add(BorderLayout.CENTER, bar);		
+		mainPanel.add(BorderLayout.SOUTH, buttonPanel);
+		mainPanel.setBackground(MainGUI.BGCOLOR_LIGHTBLUE);
 		
-		return mainpanel;
+		return mainPanel;
 	}
 	
 	
@@ -322,7 +322,7 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 		
 		// Check to make sure fromDate and toDate are valid
 		if (!reservation.isValidDuration(fromDate, toDate)) {
-			JOptionPane.showMessageDialog(mainpanel, "Invalid DropOff & PickUp dates!\nPickUp date cannot be before DropOff Date",
+			JOptionPane.showMessageDialog(mainPanel, "Invalid DropOff & PickUp dates!\nPickUp date cannot be before DropOff Date",
 										 "ERROR", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}				
@@ -437,7 +437,7 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonUpdate) {
-			int confirm = JOptionPane.showConfirmDialog(mainpanel, "Are you sure you want to UPDATE this reservation?");
+			int confirm = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to UPDATE this reservation?");
 			if (confirm == 0) {
 				boolean updateSuccess = updateReservation();
 				
@@ -452,7 +452,7 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 			}	
 		}
 		else if (e.getSource() == buttonCancel) {
-			int confirm = JOptionPane.showConfirmDialog(mainpanel, "Are you sure you want to CANCEL this reservation?");
+			int confirm = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to CANCEL this reservation?");
 			if (confirm == 0) {
 				cancelReservation();
 
@@ -476,11 +476,11 @@ public class ViewReservation extends BaseReservationForm implements ActionListen
 				bill.generateBill(fileName, false);
 				report.generateReport(fileName, true);
 				
-				JOptionPane.showMessageDialog(mainpanel, "File " + fileName + " was saved successfully!\n",
+				JOptionPane.showMessageDialog(mainPanel, "File " + fileName + " was saved successfully!\n",
 												"INFO", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
-				JOptionPane.showMessageDialog(mainpanel, "Cannot save file!\nBill or Report not found.",
+				JOptionPane.showMessageDialog(mainPanel, "Cannot save file!\nBill or Report not found.",
 												"ERROR", JOptionPane.ERROR_MESSAGE);
 										
 			}

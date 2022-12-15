@@ -25,24 +25,24 @@ public class MainGUI implements ActionListener {
 	public static Color BGCOLOR_LIGHTBLUE = new Color(159, 206, 249);
 	public static Color FGCOLOR_DARKBLUE = new Color(32, 89, 153);
 	
-	JFrame mainFrame;
-	JPanel menuPanel;
-	JPanel mainPanel;
+	private JFrame mainFrame;
+	private JPanel menuPanel;
+	private JPanel mainPanel;
 	
-	JLabel lblMainTitle;
-	JButton btnNewRes;
-	JButton btnViewModifyRes;
-	JButton btnViewActiveRes;
-	JButton btnViewInactiveRes;
+	private JLabel lblMainTitle;
+	private JButton btnNewRes;
+	private JButton btnViewModifyRes;
+	private JButton btnViewActiveRes;
+	private JButton btnViewInactiveRes;
 	
-	NewReservation newReservationForm;   
-	ViewReservation viewReservationForm; 
-	ActiveReservationsTable activeReservationsTable;
-	InactiveReservationsTable inactiveReservationsTable;
+	private NewReservation newReservationForm;   
+	private ViewReservation viewReservationForm; 
+	private ActiveReservationsTable activeReservationsTable;
+	private InactiveReservationsTable inactiveReservationsTable;
 	
 	// keep track of the lastest reservation selected by the user
 	// ActiveReservationsTable and InactiveReservationsTable
-	Reservation lastSelectedReservation = null; 
+	private Reservation lastSelectedReservation = null; 
 	
 	
 	public MainGUI() {
