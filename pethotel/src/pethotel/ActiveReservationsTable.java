@@ -1,3 +1,13 @@
+// ActiveReservationTable is a GUI class responsible for generating
+// a table containing all active (currently in-progress and upcoming)
+// reservations. The table only displays the most important info of
+// each reservation, e.g. Status, Drop-Off Date, Pick-Up Date, PetType,
+// PetName, Owner, Breed, and ReservationID. It also allows the user
+// to select a specific reservation from the table to view, modify, 
+// or cancel the reservation, or generate a bill & report for the reservation.
+//
+// Author: Jessica Chen
+
 package pethotel;
 
 import javax.swing.*;
