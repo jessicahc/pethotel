@@ -156,7 +156,7 @@ public class MainGUI implements ActionListener {
 	}
 	
 	
-	protected void displayViewModifyReservation(ActionEvent e) {
+	protected void displayViewModifyReservation() {
 		if (lastSelectedReservation != null) {
 			viewReservationForm = new ViewReservation(lastSelectedReservation);
 		}
@@ -237,7 +237,7 @@ public class MainGUI implements ActionListener {
 		}
 		else if (cmd.equalsIgnoreCase(btnViewModifyRes.getText())) {
 			System.out.println("ViewModifyAReservation is clicked");
-			displayViewModifyReservation(e);
+			displayViewModifyReservation();
 		}
 		else if (cmd.equalsIgnoreCase(btnViewActiveRes.getText())) {
 			System.out.println("ViewActiveReservations is clicked");
